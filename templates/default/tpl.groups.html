@@ -1,0 +1,283 @@
+<!-- BEGIN javascript -->
+        <script>
+            var replacer = new RegExp('amp;', 'g');
+            var newGroupLink = "{NEW_GROUP_LINK}".replace(replacer, "");
+            var addMemberLink = "{ADD_MEMBER_LINK}".replace(replacer, "");
+            var removeMemberLink = "{REMOVE_MEMBER_LINK}".replace(replacer, "");
+            var deleteGroupLink = "{DELETE_GROUP_LINK}".replace(replacer, "");
+            var selectedGroup;
+            var deleteGroupConfirmation = "{DELETE_GROUP_CONFIRMATION}";
+
+            $(document).ready(function(){
+
+                //Gross-Klein-Schreibung nicht beachten bei Filterung. jQuery-Conatins überschreiben.
+                $.expr[':'].Contains = function(a, i, m) {
+                    return $(a).text().toUpperCase()
+                            .indexOf(m[3].toUpperCase()) >= 0;
+                };
+                $.expr[':'].contains = function(a, i, m) {
+                    return $(a).text().toUpperCase()
+                            .indexOf(m[3].toUpperCase()) >= 0;
+                };
+
+
+                $('#xsca_new_group_button').click(function(e){
+                    e.preventDefault();
+                    newGroup(e);
+                });
+
+                $('.xsca_delete_group').live("click", function(e){
+                    e.preventDefault();
+
+                    var answer = confirm(deleteGroupConfirmation)
+                    if (answer){
+                        deleteGroup(this, e);
+                    }
+                });
+
+                $('#xsca_group_name_container').live("click", function (e){
+                    selectGroup($(this).parent('.xsca_group'), e);
+                });
+
+                $('.xsca_participant').live("click", function(e){
+                    addToGroup(this);
+                });
+
+                $('.xsca_member').live("click", function(e){
+                    removeFromGroup(this);
+                });
+
+                $('#xsca_participants_filter').keyup(function(){
+                    filterParticipants(this);
+                });
+
+                $('.xsca_clear_groups_filter').click(function(e){
+                    var filter = $('#xsca_groups_filter');
+                    filter.val('');
+                    filterGroups(filter);
+                });
+
+                $('.xsca_clear_participants_filter').click(function(e){
+                    var filter = $('#xsca_participants_filter');
+                    filter.val('');
+                    filterParticipants(filter);
+                });
+
+                $('#xsca_groups_filter').keyup(function(){
+                    filterGroups(this);
+                });
+
+                $(document).ajaxStart(function(){
+                    $('.xsca_loader').fadeIn("fast");
+                }).ajaxStop(function(){
+                    $('.xsca_loader').fadeOut("fast");
+                    $('.xsca_loaded').delay("fast").fadeIn("fast").fadeOut("slow");
+                });
+
+                if($(".xsca_group").length == 0){
+                    $("#xsca_create_a_group_info").fadeIn(0);
+                }
+
+                selectGroup($(".xsca_group").first());
+            });
+
+
+
+            filterParticipants = function(elem){
+                $(".xsca_participant:not(:contains('"+$(elem).val()+"'))").fadeOut(0);
+                $(".xsca_participant.xsca_in_participants:contains('"+$(elem).val()+"')").fadeIn(0);
+            };
+
+            filterGroups = function(elem){
+                $(".xsca_group:not(:contains('"+$(elem).val()+"'))").fadeOut(0, function(){
+                    var id = $(this).parent('.xsca_group').attr("group_id");
+                    if(id == selectedGroup){
+                        selectedGroup = null;
+                    }
+                }).children("input").prop("checked", false);
+                var filtered = $(".xsca_group:contains('"+$(elem).val()+"')").fadeIn(0);
+
+                if(filtered.length == 1){
+                    selectGroup(filtered);
+                }
+            };
+
+            newGroup = function(e){
+                var name = $('#xsca_new_group_name').val();
+                $('#xsca_new_group_name').val("");
+                $('input[name=group_selector]').prop("checked", false);
+                $("#xsca_create_a_group_info").fadeOut("faste");
+                $.ajax({
+                    url: newGroupLink+"&groupName="+name,
+                    success: function(data) {
+                        var elem = $(data);
+//                        var groups = $("div.xsca_groups > div.xsca_group");
+//                        var found = false;
+//                        for(var groupId in groups){
+//                            var groupElem = $(groups[groupId]);
+//                            console.log(groupElem);
+//                            if($.trim(elem.text()).replace(" delete", "").toLowerCase() < $.trim(groupElem.text()).replace(" delete", "").toLowerCase()){
+//                                elem.insertBefore(groupElem);
+//                                console.log("found: " + groupElem.text());
+//                                var found = true;
+//                                break;
+//                            }
+//                        }
+//                        if(!found){
+//                            $("div.xsca_groups").append(elem);
+//                            console.log("appending.");
+//                        }
+                        elem.insertAfter($('#xsca_select_a_group_info'));
+                        selectGroup(elem);
+                    }
+                });
+            };
+
+            deleteGroup = function(elem, e){
+                var id = $(elem).parent('.xsca_group').attr("group_id");
+                if(id == selectedGroup)
+                    selectedGroup = null;
+                $('div[group_id ='+id+']').remove();
+                $.ajax({
+                    url: deleteGroupLink+"&groupId="+id,
+                    success: function(data) {
+
+                    }
+                });
+                if($(".xsca_group").length == 0){
+                    $("#xsca_create_a_group_info").fadeIn(0);
+                }
+            };
+
+            selectGroup = function(elem){
+                elem.find("input").prop("checked", true);
+                var id = elem.attr("group_id");
+                if(id!=selectedGroup){
+                    selectedGroup = id;
+                    $(".xsca_participant").fadeIn(0).addClass("xsca_in_participants");
+                    $(".xsca_members").slideUp("fast");
+                    $('div[group_id ='+selectedGroup+'] .xsca_members').delay("fast").slideDown("fast");
+                    //remove all participants who are already in the group.
+                    $('div[group_id ='+selectedGroup+'] .xsca_member').each(function() {
+                        $('.xsca_participant[participant_id = '+ $(this).attr("member_id")+']').fadeOut(0).removeClass("xsca_in_participants");
+                    });
+                }
+            };
+
+            addToGroup = function(participant){
+                var participantId = $(participant).attr("participant_id");
+                var originalSize = $(participant).css("font-size");
+                if(selectedGroup > 0){
+                    $(participant).fadeOut(0).removeClass("xsca_in_participants");
+                    var saveGroup = selectedGroup;
+                    $.ajax({
+                        url: addMemberLink+"&groupId="+selectedGroup+"&participantId="+participantId,
+                        success: function(data) {
+                            if(saveGroup == selectedGroup)
+                                $('div[group_id ='+selectedGroup+'] .xsca_members').append(data);
+                        }
+                    });
+                }else{
+                    if($(".xsca_group").length != 0)
+                        $('#xsca_select_a_group_info').fadeIn("fast").delay(2000).fadeOut("slow");
+                }
+            };
+
+            removeFromGroup = function(member){
+                var memberId = $(member).attr("member_id");
+                var groupId = $(member).parents().filter(".xsca_group").attr("group_id");
+                var saveGroup = selectedGroup;
+                $(member).remove();
+                $.ajax({
+                    url: removeMemberLink+"&groupId="+selectedGroup+"&memberId="+memberId,
+                    success: function(data) {
+                        if(saveGroup == selectedGroup)
+                            $('.xsca_participant[participant_id='+memberId+']').fadeIn(0).addClass("xsca_in_participants");
+                    }
+                });
+            }
+        </script>
+<!-- END javascript -->
+
+<!-- BEGIN groups -->
+<div class="xsca_groups">
+
+    <div class="ilTableHeaderTitle">
+       <h3 class="ilTableHeaderTitle">{GROUPS}</a></h3>
+    </div>
+
+    <div class="ilToolbar" id="ToolbarGroups" >
+    <span class="xsca_new_group">
+        New Group: <input type="text" id="xsca_new_group_name" placeholder="New Group Name" />
+        <a href="#" id="xsca_new_group_button">Create</a>
+    </span>
+    <!--
+    <span class="ilToolbarSeparator"> </span>
+    <span>
+    Filter: <input type="text" id="xsca_groups_filter" placeholder="Filter"> <span class="xsca_clear_groups_filter"> x </span>
+    </span>
+    -->
+    </div>
+
+    <!-- BEGIN createagroup -->
+    <span class="xsca_group_info" id="xsca_create_a_group_info">{CREATE_A_GROUP}</span>
+    <!-- END createagroup -->
+    <span class="xsca_group_info" id="xsca_select_a_group_info">{SELECT_A_GROUP}</span>
+    <!-- BEGIN groupplace -->
+    {GROUP_PLACE}
+    <!-- END groupplace -->
+
+</div>
+<!-- END groups -->
+
+<!-- BEGIN participants -->
+<div class="xsca_loader">
+    <img src="/templates/default/images/loader.gif" />
+</div>
+<div class="xsca_loaded">
+    <img src="/templates/default/images/scorm/passed.gif" />
+</div>
+
+
+<div class="xsca_participants">
+    <div class="ilTableHeaderTitle">
+        <h3 class="ilTableHeaderTitle">{PARTICIPANTS}</a></h3>
+    </div>
+
+    <div class="ilToolbar"  >
+    Filter: <input type="text" id="xsca_participants_filter" placeholder="Filter"> <span class="xsca_clear_participants_filter"> x </span>
+    </div>
+
+    <div class="ilTableOuter" >
+    <div class="xsca_participants_holder">
+    <!-- BEGIN participant -->
+        <span class="xsca_participant" participant_id="{PARTICIPANT_ID}">
+             <img src="{PARTICIPANT_IMAGE}"> <br/>
+             {PARTICIPANT} <br/> {PARTICIPANT_EMAIl} <br/>
+             <input type="button" value="{PARTICIPANT_ADD}">
+        </span>
+    <!-- END participant -->
+    </div>
+    </div>
+</div>
+<!-- END participants -->
+
+<!-- BEGIN group -->
+<div class="xsca_group xsca_in_participants" group_id="{GROUP_ID}">
+    <span id="xsca_group_name_container"><input type="radio" name="group_selector" class="xsca_group_selector"/> {GROUP}: {GROUP_NAME} </span><a href="#" class="xsca_delete_group">delete</a>
+    <div class = "xsca_members">
+        <!-- BEGIN memberplace -->
+        {MEMBER_PLACE}
+        <!-- END memberplace -->
+    </div>
+</div>
+<div style=clear:both></div>
+<!-- END group -->
+
+
+<!-- BEGIN member -->
+<span class="xsca_member" member_id="{PARTICIPANT_ID}">
+    {PARTICIPANT} <br/> {PARTICIPANT_EMAIl} <br/>
+    <input type="button" value="{PARTICIPANT_REMOVE}">
+</span>
+<!-- END member -->

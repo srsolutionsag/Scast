@@ -1,0 +1,67 @@
+<script type="text/javascript">
+	$(document).ready(function () {
+		//$('div.waiter').fadeOut();
+		$('{DOM}').click(function () {
+			//event.preventDefault();
+			$('div.waiter').fadeIn();
+			var link = $(this).attr('href');
+			$.ajax({
+				type: 'GET',
+				url: link,
+				cache: false,
+				success: function (data) {
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log('error...', xhr);
+				},
+				complete: function () {
+//					$('div.waiter').fadeOut();
+					location.reload();
+				}
+			});
+			return false;
+		});
+	});
+</script>
+<style>
+	div.waiter {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: none;
+		background-color: whitesmoke;
+		opacity: 0.85;
+		-moz-opacity: 0.85;
+		/*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=85);*/
+	}
+
+	div.waiter div.waiter_img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 400px;
+		width: 32px;
+		height: 32px;
+	}
+
+	div.waiter p {
+		width: 400px;
+		color: #000000;
+		font-size: 15px;
+		text-align: center;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 12px;
+	}
+</style>
+<div class="waiter">
+	<div class="waiter_img">
+		<img src="./Customizing/global/plugins/Services/Repository/RepositoryObject/Scast/templates/default/Services/ajax-loader.gif">
+	</div>
+	<!-- BEGIN message  -->
+	<p>{MESSAGE}</p>
+	<!-- END message -->
+</div>

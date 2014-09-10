@@ -1,0 +1,63 @@
+<!-- BEGIN row -->
+<tr class="xsca {CSS_ROW} {CSS_STATUS}">
+	<td class="std">
+		<img src="{IMAGE}">
+	</td>
+	<td class="std">
+		<!-- BEGIN flash -->
+		<span class="small"><img src="{ImgMp4}">  <a target="_blank" href="{LinkFlash}">{FLASH}</a></span>
+		<br/>
+		<!-- END flash -->
+		<!-- BEGIN quicktime -->
+		<span class="small"><img src="{ImgMov}">  <a href="{LinkMov}">{QUICKTIME}</a></span>
+		<br/>
+		<!-- END quicktime -->
+		<!-- BEGIN ipod -->
+		<span class="small"><img src="{ImgM4v}">  <a href="{LinkM4v}">{IPOD}</a></span>
+		<br/>
+		<!-- END ipod -->
+		<!-- BEGIN annotation -->
+		<span class="small"><img src="{ImgAnno}">  <a target="_blank" href="{LinkAnnotation}">{ANNOTATION}</a></span>
+		<br/>
+		<!-- END annotation -->
+		<!-- BEGIN download -->
+		<script>
+			$(document).ready(function () {
+				$("a.xsca_download_link").mouseover(function () {
+					$(this).children(".xsca_clip_tooltip").fadeIn(100);
+				});
+				$("a.xsca_download_link").mouseout(function () {
+					$(this).children(".xsca_clip_tooltip").fadeOut(100);
+				});
+			});
+		</script>
+		<span class="small" style="display: none;"><img src="{ImgDownload}">  <a class="xsca_download_link" target="_blank" href="{DownloadLink}">{DOWNLOAD}<span class="xsca_clip_tooltip">{TOOLTIP}</span></a></span>
+		<br/>
+		<!-- END download-->
+		<span class="small clip_status">{CLIP_STATUS}</span>
+	</td>
+	<!-- BEGIN title -->
+	<td class="std"><p>{TITLE}</p>
+
+		<p>{SUBTITLE}</p></td>
+	<!-- END title -->
+	<!-- BEGIN presenter -->
+	<td class="std"><p>{PRESENTER}</p></td>
+	<!-- END presenter -->
+	<!-- BEGIN location -->
+	<td class="std"><p>{LOCATION}</p></td>
+	<!-- END location -->
+	<!-- BEGIN recordingstation -->
+	<td class="std"><p>{RECORDINGSTATION}</p></td>
+	<!-- END recordingstation -->
+	<!-- BEGIN date -->
+	<td class="std"><p>{DATE}</p></td>
+	<!-- END date -->
+	<!-- BEGIN owner -->
+	<td class="std"><p>{OWNER}</p></td>
+	<!-- END owner -->
+	<!-- BEGIN actions -->
+	<td class="std"><p>{ACTIONS} <a href="{EDIT_LINK}">{EDIT}</a> <a href="{EDIT_MEMBERS_LINK}">{EDIT_MEMBERS}</a></p>
+	</td>
+	<!-- END actions -->
+</tr><!-- END row -->
