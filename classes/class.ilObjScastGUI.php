@@ -15,7 +15,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 /**
  * ilObjScastGUI
  *
- * @author            Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author            Fabian Schmid <fs@studer-raimann.ch>
  * @author            Martin Studer <ms@studer-raimann.ch>
  *
  * $Id$
@@ -68,7 +68,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				$this->initHeader(false);
 				$this->setTabs();
 				$this->tabs_gui->activateTab('groups');
-                $this->setLocator();
+				$this->setLocator();
 				$groups_gui = new xscaGroupGUI($this->object);
 				$this->ctrl->forwardCommand($groups_gui);
 				break;
@@ -97,8 +97,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$info->enablePrivateNotes();
 		$info->getHiddenToggleButton();
 		$info->addTagging();
-		if ($this->object->getShowUploadToken() AND xscaConfig::get(xscaConfig::ALLOW_UPLOAD_TOKEN)
-			AND ilObjScastAccess::checkPermissionOnchannel($_GET['ref_id'], 'read')
+		if ($this->object->getShowUploadToken() AND
+			xscaConfig::get(xscaConfig::ALLOW_UPLOAD_TOKEN) AND ilObjScastAccess::checkPermissionOnchannel($_GET['ref_id'], 'read')
 		) {
 			$info->addSection($this->pl->txt('upload_token'));
 			$info->addProperty($this->pl->txt('channel_id'), $this->object->getExtId());
@@ -231,8 +231,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		 * @var $ilUser ilObjUser
 		 */
 		$this->object = new ilObjScast();
-		if (! $rbacsystem->checkAccess('create', $_GET[self::REF_ID], $this->object->getType())
-			OR ! $this->xsca_user->hasSystemAccount()
+		if (! $rbacsystem->checkAccess('create', $_GET[self::REF_ID], $this->object->getType()) OR ! $this->xsca_user->hasSystemAccount()
 		) {
 			ilUtil::sendFailure($lng->txt('no_permission'));
 		} else {
@@ -469,8 +468,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$ne->setValue($this->object->getExtId());
 			$this->form->addItem($ne);
 			$ci = new ilCustomInputGUI($this->txt('edit_switchcast_channel'), 'channel_link');
-			$ci->setHtml('<a target=\'_blank\' href=\'' . $this->object->getEditLink() . '\'>'
-				. $this->object->getEditLink() . '</a>');
+			$ci->setHtml('<a target=\'_blank\' href=\'' . $this->object->getEditLink() . '\'>' . $this->object->getEditLink() . '</a>');
 			$this->form->addItem($ci);
 		}
 		if (xscaConfig::get(xscaConfig::ALLOW_UPLOAD_TOKEN)) {
@@ -539,8 +537,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$html_output = $this->renderIntroductionText();
 		$table = new xscaClipTableGUI($this, 'showContent');
 		$html_output .= $table->getXscaHTML();
-		$this->tpl->setContent($html_output . ilWaitGUI::init('#reloadCache', $this->pl->txt('msg_reload_clips'))
-				->getHtml());
+		$this->tpl->setContent($html_output . ilWaitGUI::init('#reloadCache', $this->pl->txt('msg_reload_clips'))->getHtml());
 		$this->tpl->setPermanentLink($this->getType(), $this->object->getRefId());
 	}
 

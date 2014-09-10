@@ -14,7 +14,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
  * Application class for Scast repository object.
  *
  * @author Martin Studer <ms@studer-raimann.ch>
- * @author Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author Fabian Schmid <fs@studer-raimann.ch>
  *
  * $Id$
  */

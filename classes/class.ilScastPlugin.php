@@ -9,7 +9,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
  * Scast repository object plugin
  *
  * @author  Alex Killing <alex.killing@gmx.de>
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @version $Id$
  *
  */

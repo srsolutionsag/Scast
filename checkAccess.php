@@ -24,10 +24,9 @@
  * Access/Condition checking for Scast object
  *
  *
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @author  Oskar Truffer <ot@studer-raimann.ch>
  * @author  Martin Studer <mr@studer-raimann.ch>
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
  * @version $Id$
  *
  */

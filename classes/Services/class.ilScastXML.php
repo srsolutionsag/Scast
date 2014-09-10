@@ -5,7 +5,7 @@ require_once('class.ilScastRequestCache.php');
 /**
  * Class ilScastXML
  *
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @author  Martin Studer <ms@studer-raimann.ch>
  * @version $Id:
  *

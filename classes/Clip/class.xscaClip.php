@@ -8,7 +8,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 /**
  * Class xscaClip
  *
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @author  Martin Studer <ms@studer-raimann.ch>
  * @version $Id:
  *
