@@ -1,0 +1,55 @@
+<div id="xsca_dimmer" ></div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('.xsca_click').click(function(){
+		
+		var classes;
+		var cls;
+		var id;
+		var url;
+		
+		classes =  $(this).attr('class');
+		cls = classes.split(" ");
+		id = cls[1]; 
+		url = $("#url-"+id).val();
+
+		$('#xsca_dimmer').fadeTo(1000, 0.9);
+		$('.xsca_player').slideUp(1000);
+		$("#pl-"+id).slideDown(1000);
+		$('html,body').animate({scrollTop: $("#pl-"+id).offset().top}, 1000);
+		//$("#pl-"+id).html('<iframe frameborder="0" scrolling="no" src="http://www.google.ch" class="xsca_iframe"></iframe>');
+
+		$("#if-"+id).attr('src', url);
+		
+		$("#if-"+id).load(function() 
+		{
+			callback(this);
+		});
+		
+		
+		//$("#if-"+id).attr('src', $("#if-"+id).attr('src'));
+
+		
+	});
+	
+	$('#xsca_dimmer').click(function(){
+		$('#xsca_dimmer').fadeOut(1000);
+		$('.xsca_player').slideUp(1000);
+		$("iframe").each(function(e){
+			$(this).attr('src', "");
+		});
+	});
+	
+	$(document).keyup(function(e){
+		if (e.keyCode == 27){ 
+			$('#xsca_dimmer').fadeOut(1000);
+			$('.xsca_player').slideUp(1000);
+			$("iframe").each(function(e){
+				$(this).attr('src', "");
+			});
+		}
+	});
+ });
+
+</script>

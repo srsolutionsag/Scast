@@ -1,0 +1,218 @@
+<!-- language file start -->
+accept_eula#:#I accept the agreement
+actions#:#Actions
+add#:#Add
+add_clip#:#Add Clip
+add_member#:#Add Member
+add_Member#:#Add Member
+add_member#:#Add Member
+admin_config_allow_test_channels#:#Allow Testchannels
+admin_config_allow_test_channels_info#:#Allow Testchannels
+admin_config_cacrt_file_info#:#Certificate authority
+admin_config_castkey_file_info#:#SWITCH-Cast certificate, please contact Switch for further information
+admin_config_castkey_password_info#:#optinal
+admin_config_castkeypassword#:#Certificate-Password
+admin_config_castkeypassword_info#:#SwitchCast Certificate-Password (optional)
+admin_config_create_default_sysaccount#:#
+admin_config_create_default_sysaccount_info#:#
+admin_config_crt_file_info#:#SWITCH-Cast certificate, please contact Switch for further information
+admin_config_deactivate_get_existing#:#Deactivate Selection of existing Channels
+admin_config_deactivate_get_existing_info#:#Deactivate Selection of existing Channels
+admin_config_deactivate_ivt#:#Deactivate IVT
+admin_config_deactivate_ivt_info#:#Deactivate IVT
+admin_config_default_sysaccount#:#Default-System-Account
+admin_config_default_sysaccount_info#:#If the user has no external account or the external account has no Sysaccount, the default Sysaccount is taken. Use eg: castsysaccount_switch.ch
+admin_config_eula_text#:#EULA
+admin_config_external_authority_id#:#External Authority
+admin_config_external_authority_id_info#:#ID of External Authority
+admin_config_file_cacrt#:#CA-Certificate
+admin_config_file_cacrt_info#:#Path to webservers CA-Certificate
+admin_config_file_castkey#:#Key
+admin_config_file_castkey_info#:#Path to SwitchCast Key-File
+admin_config_file_crt#:#Path to SwitchCast CRT-File
+admin_config_file_localkey#:#Path to local Key-File
+admin_config_goto#:#Redirect on direct links
+admin_config_goto_info#:#Anonymous users will be redirected to this page.
+admin_config_goto_login#:#To Login
+admin_config_goto_repo#:#Repository
+admin_config_host_external_authority#:#Host of External Authority
+admin_config_host_switch_api#:#SwitchCast-API (https://api.cast.switch.ch/api/v2)
+admin_config_host_switchcast#:#SwitchCast-Host (https://cast.switch.ch)
+admin_config_info_allow_test_channels#:#Allows Users to create their own testchannels
+admin_config_localkey_file_info#:#Certificate-key of webserver
+admin_config_scast_configuration_id#:#Standard-Configuration-ID
+admin_config_scast_metadata_export#:#Metadata Export
+admin_config_scast_scast_access#:#Authentication-Methode (external_authority)
+admin_config_scast_streaming_configuration_id#:#Streaming-Configuration-ID
+admin_config_scast_use_eula#:#Show EULA
+admin_config_show_api_debug#:#Show Debug
+admin_config_show_api_debug_info#:#Shows all Switch-Cast
+admin_config_sysaccount_eth_ch#:#ETH
+admin_config_sysaccount_phtg_ch#:#PHTH
+admin_config_sysaccount_phz_ch#:#PH Zentralschweiz
+admin_config_sysaccount_phzh_ch#:#PH Zürich
+admin_config_sysaccount_switch_ch#:#Switch
+admin_config_sysaccount_unibas_ch#:#Uni Basel
+admin_config_sysaccount_unibe_ch#:#Universität Bern
+admin_config_sysaccount_unifr_ch#:#Uni Fribourg
+admin_config_sysaccount_unil_ch#:#Uni Luzern
+admin_config_title_certificates#:#Certificates
+admin_config_title_switch#:#SwitchCast
+admin_config_title_sysaccounts#:#System-Accounts
+admin_form_button_cancel#:#Cancel
+admin_form_button_save#:#Save
+agreement_title#:#Service Conditions
+allow_annotations#:#Allow annotations
+annotations#:#Annotations
+available_participants#:#Available Participants
+back_to_list#:#back
+cancel#:#Cancel
+cast_back_to_list#:#Back to list
+channel#:#Channel
+channel_author#:#Channel author
+channel_chaptering#:#Auto chaptering
+channel_chaptering_desc#:#Enable auto chaptering for each uploaded media. Auto chaptering based on OCR scanning of the slides.
+channel_description#:#Description
+channel_discipline#:#Discipline
+channel_extid#:#Channel-Ext-ID
+channel_extid_desc#:#Die externe Channel-ID müssten Sie beim Podcast-Support der Uni Bern nachfragen. Bitte senden Sie ein Mail an <a href="mailto:podcast@id.unibe.ch">podcast@id.unibe.ch</a>  mit der SWITCHcast Channel Nummer.
+channel_id#:#Channel ID
+channel_kind#:#Channel Type
+channel_kind_productiv#:#Productiv
+channel_kind_test#:#Test
+channel_name#:#Channel name
+channel_searchability#:#Searchability
+channel_searchability_desc#:#Channel content is publicly <a target="_blank" href="https://collection.switch.ch/">searchable in SWITCHcollection</a>. Clips will be licensed in SWITCHcollection under Creative Commons Attribution-Noncommercial-No Derivative Works 2.5 Switzerland.
+channel_streamingonly#:#Streaming Only
+channel_streamingonly_desc#:#A stream can only be watched via an internet connection using the SWITCH video player software
+channel_type#:#Channel type
+clip_based_rightmanagement#:#Set permissions for a clip
+clip_based_rightmanagement_desc#:#This setting enables an individual rights management based on clips ownership (iVT-Mode). Let this setting deactivated, when all students are allowed to see all the clips of this channel.
+clip_confirm_delete#:#The deletion causes the clip is deleted from SWITCHcast. Do you want to delete this clip really?
+clip_deleted#:#The clip has been deleted.
+clip_inviting_possible#:#Clip Owner are able to invite other users
+clip_onpublishing#:#Bitte haben Sie etwas Geduld. Der Clip wird publiziert.
+clip_onupload#:#Bitte haben Sie etwas Geduld. Der Clip wird derzeit für die spätere Bearbeitung vorbereitet.
+clip_status_created#:#Clip not yet published, not visible for students
+clip_status_importing#:#Clip's beeing imported
+clip_status_preparing#:#Clip is beeing prepared, not yet visible for students
+clip_status_processing#:#Clip is beeing processed, not yet visible for students
+clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
+clips#:#Clips
+configure#:#Configure SwitchCast
+content#:#Content
+context#:#Context
+create_a_group#:#Please create a group first.
+crs_create_xsca#:#SWITCHCast Channel anlegen
+cut_switch#:#Cut Clip
+date#:#Date
+delete_clip#:#Delete Clip
+delete_group_confirmation#:#Are you sure you want to delete the group?
+department#:#Department
+department_desc#:#How is the name of your department?
+description#:#Description
+discipline_0#:#Disciplin
+discipline_0_desc#:# 
+discipline_0_desc#:# 
+discipline_0_desc#:# 
+discipline_1#:#Disciplin
+discipline_2#:#Disciplin
+dont_allow_annotations#:#No annotations
+download_clip#:#Download Clip
+download_tooltip#:#If the download doesn't start, right-click on the link and choose "Save Link as..."
+edit#:#Edit
+edit_clip#:#Edit Clip
+edit_members#:#Edit Members
+edit_owner#:#Edit Owner
+edit_properties#:#Edit Settings
+edit_switchcast_channel#:#Edit at SWITCHcast.ch
+email#:#E-Mail
+estimated_content_in_hours#:#Estimated video content in hours
+estimated_content_in_hours_desc#:#How many video material (in hours) do you intend to publish in this channel?
+existing_channel#:#Existing Channel
+export_xml#:#Export Settings as XML
+filt_ivt_owner#:#Owner (AAI-UniqueId)
+flash#:#Stream
+fold_create_xsca#:#SWITCHCast Channel anlegen
+fullname#:#Name
+group#:#Group
+groups#:#Groups
+grp_create_xsca#:#SWITCHCast Channel anlegen
+has_references#:#Attention: The channel as some more references in ILIAS
+has_references#:#
+import_xml#:#Import Settings
+introduction_text#:#Work Instructions
+ipod#:#Mobile
+license#:#License
+license_desc#:#For detailed information, visit <a target='_blank' href='http://creativecommons.org/international/ch/'>Creative Commons International (Switzerland)</a>
+lifetime_of_content_in_months#:#Intended lifetime of content
+lifetime_of_content_in_months_desc#:#How long shoud the video material be published?
+location#:#Location
+member#:#Member
+msg_obj_modified#:#Object modified
+msg_reload_clips#:#Clips are beeing reloaded. This can take a few minutes
+new_channel#:#New Channel
+no_channels_available#:#There are no existing channels available.
+no_external_id#:#In ILIAS was no SWITCHaai-ID found.
+no_group_info#:#Grouping: You can arrange the users in groups. If a user is defined as owner of a clip, then the users which are members of the same group have access to this clip as well.
+no_owner#:#no Owner
+not_assigned#:#not assigned
+obj_xsca#:#SWITCHcast Channel
+obj_xsca#:#SWITCHcast Channel
+obj_xsca_duplicate#:#Copy
+obj_xsca_select#:#Choose SWITCHcast Channel
+objs_xsca#:#SWITCHcast Channels
+objs_xsca_duplicate#:#Copy SWITCHcast Channel
+offline#:#Offline
+online#:#Online
+owner#:#Owner
+owner_unknown#:#Owner is not available in ILIAS
+permission_denied#:#Access denied
+presenter#:#Presenter
+preview#:#Preview
+properties#:#Settings
+quicktime#:#Desktop
+recordingstation#:#Recording station
+reload_clips#:#Reload Clips
+remove#:#Remove
+rep_robj_xsca_obj_xsca#:#SWITCHcast Channel
+rep_robjs_xsca_obj_xsca#:#SWITCHcast Channels
+save#:#Save
+scast_plugin_configuration#:#Settings
+select_a_group#:#Please choose a group!
+select_existing_channel#:#Choose an existing Channel
+settings_description#:#SwitchCast-API Settings
+status#:#State
+streaming_only#:#Streaming only
+success_edit#:#Saved
+title#:#Title
+update#:#Save
+without_owner#:#Without owner
+xsca_add#:#Add SWITCHcast Channel
+xsca_delete#:#Delete Channel
+xsca_edit_permission#:#Change Permissions on Channel
+xsca_new#:#Create new SWITCHcast Channel
+xsca_read#:#Channel is readable
+xsca_visible#:#Channel is visible
+xsca_write#:#Edit Channel-Settings
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#
+#:#

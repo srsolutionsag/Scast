@@ -1,0 +1,16 @@
+tr.status_created {
+	background-color: #FFD5D1;
+}
+
+span.clip_status {
+	clear: both;
+	float: left;
+}
+
+.fsx_clipbox {
+	background-color: #008000;
+	display:          block;
+	text-wrap: normal;
+	overflow: hidden;
+	width:    320px;
+}

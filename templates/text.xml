@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<channel>
+    <name>TC_ILIAS: ilias-test</name>
+    <discipline_id>1932</discipline_id>
+    <license></license>
+    <autor>Fabian Schmid</autor>
+    <department>ilub</department>
+    <organization_domain>unibe.ch</organization_domain>
+    <access>external_authority</access>
+    <external_authority_id>4</external_authority_id>
+    <export_metadata>0</export_metadata>
+    <template_id>5785</template_id>
+    <estimated_content_in_hours>1</estimated_content_in_hours>
+    <lifetime_of_content_in_months>6</lifetime_of_content_in_months>
+    <sort_criteria>recording_date</sort_criteria>
+    <auto_chapter>1</auto_chapter>
+    <allow_annotations>no</allow_annotations>
+</channel>
