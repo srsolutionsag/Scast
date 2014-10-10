@@ -5,7 +5,7 @@ require_once('class.ilScastRequestCache.php');
 /**
  * Class ilScastXML
  *
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @author  Martin Studer <ms@studer-raimann.ch>
  * @version $Id:
  *
@@ -86,7 +86,7 @@ class ilScastXML {
 	 */
 	private static function request($a_url, $a_request_method, $a_type, array $arr_data = NULL) {
 		global $ilUser;
-		$a_pl = new ilScastPlugin();
+
 		$log = ilScastLog::getInstance();
 		$hash = $a_request_method . $a_url;
 		//
@@ -156,7 +156,7 @@ class ilScastXML {
 			return ilScastRequestCache::get($hash, $type);
 		}
 		//
-		$a_pl = new ilScastPlugin();
+
 		if (is_array($a_xml)) {
 			$a_xml = self::arrayToXML($a_xml['root'], $a_xml['data']);
 		}

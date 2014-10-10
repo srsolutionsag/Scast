@@ -11,7 +11,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
  *
  * @author  Alex Killing <alex.killing@gmx.de>
  * @author  Martin Studer <ms@studer-raimann.ch>
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @version $Id$
  *
  */
@@ -29,7 +29,7 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 		$this->tpl = $tpl;
 		$this->tabs = $ilTabs;
 		$this->toolbar = $ilToolbar;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 //		$this->pl->updateLanguages();
 	}
 

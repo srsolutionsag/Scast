@@ -44,7 +44,7 @@ class xscaClipGUI {
 		$this->user = $ilUser;
 		$this->access = $ilAccess;
 		$this->tabs = $ilTabs;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->objScast = $a_obj_scast;
 		$this->parent_gui = $a_obj_scast_gui;
 		if (! $a_clip_ext_id) {
@@ -116,11 +116,31 @@ class xscaClipGUI {
 		if ($this->clip_owner_form->checkInput()) {
 			$this->clip->setOwner($this->clip_owner_form->getInput('owner'));
 			$this->clip->update();
+			xscaApiCache::flush($this->objScast->getId());
 			ilUtil::sendSuccess($this->pl->txt('msg_obj_modified'), true);
 			$this->ctrl->redirectByClass('ilobjscastgui', 'showContent');
 		}
 		$this->clip_owner_form->setValuesByPost();
 		$this->tpl->setContent($this->clip_owner_form->getHtml());
+	}
+
+
+	/**
+	 * @param $user_id
+	 *
+	 * @return string
+	 */
+	protected static function lookUpShibbolethId($user_id) {
+		global $ilDB;
+		/**
+		 * @var $ilDB ilDB
+		 */
+		$q = 'SELECT ext_account FROM usr_data WHERE auth_mode = ' . $ilDB->quote('shibboleth', 'text')
+			. ' AND usr_id = ' . $ilDB->quote($user_id, 'integer');
+
+		$shibboleth_id = $ilDB->fetchObject($ilDB->query($q));
+
+		return $shibboleth_id->ext_account;
 	}
 
 
@@ -137,7 +157,8 @@ class xscaClipGUI {
 		$arr_participants = array();
 		$arr_participants[''] = '--' . $this->pl->txt('not_assigned') . '--';
 		foreach ($ilParticipants->getParticipants() as $user_id) {
-			if (ilObjUser::_lookupExternalAccount($user_id)) {
+			$ext_account = self::lookUpShibbolethId($user_id);
+			if ($ext_account) {
 				$ilObjUser = new ilObjUser($user_id);
 				$arr_participants[$ilObjUser->getExternalAccount()] =
 					$ilObjUser->getLastname() . ' ' . $ilObjUser->getFirstname() . ' (' . $ilObjUser->getEmail() . ')';
@@ -241,6 +262,7 @@ class xscaClipGUI {
 			$clipmember = $this->clip_member_form->getInput('clipmember');
 			if ($clipmember > 0) {
 				$this->clip->addMember($clipmember);
+				xscaApiCache::flush($this->objScast->getId());
 				echo xscaClipMembersTableGUI::getNewRow($clipmember);
 				exit;
 			}
@@ -263,14 +285,12 @@ class xscaClipGUI {
 		foreach ($ilParticipants->getParticipants() as $user_id) {
 			// Nur Benutzer, welche nicht dem Owner entsprechen und noch nicht Clip-Member und nicht Producer sind anzeigen
 			// Hier werden auch lokale Accounts zugelassen!
-			if (((string)$this->clip->getOwner() != ilObjUser::_lookupExternalAccount($user_id) OR
-					ilObjUser::_lookupExternalAccount($user_id) == '') AND ! $this->clip->isMember($user_id) AND
-				! $this->objScast->isProducer(ilObjUser::_lookupExternalAccount($user_id))
+			if (((string)$this->clip->getOwner() != ilObjUser::_lookupExternalAccount($user_id) OR ilObjUser::_lookupExternalAccount($user_id) == '')
+				AND ! $this->clip->isMember($user_id) AND ! $this->objScast->isProducer(ilObjUser::_lookupExternalAccount($user_id))
 				AND ! xscaGroup::checkSameGroup($this->objScast->getId(), $owner_id, $user_id)
 			) {
 				$ilObjUser = new ilObjUser($user_id);
-				$arr_participants[$user_id] =
-					$ilObjUser->getLastname() . ' ' . $ilObjUser->getFirstname() . ' (' . $ilObjUser->getEmail() . ')';
+				$arr_participants[$user_id] = $ilObjUser->getLastname() . ' ' . $ilObjUser->getFirstname() . ' (' . $ilObjUser->getEmail() . ')';
 			}
 		}
 		// Sortieren nach Bezeichungen. natcasesort berücksicht Gross-/Kleinschreibung nicht. asort hingegen schon.
@@ -307,20 +327,17 @@ class xscaClipGUI {
 		global $ilAccess, $ilUser;
 		if ($a_perm == 'write') {
 			//Write Access to SCastObj? OR ClipOwner?
-			If ($ilAccess->checkAccess('write', '', $this->objScast->getRefId()) OR
-				$ilUser->getExternalAccount() == $this->clip->getOwner()
+			If ($ilAccess->checkAccess('write', '', $this->objScast->getRefId()) OR $ilUser->getExternalAccount() == $this->clip->getOwner()
 			) {
 				return true;
 			}
 		} elseif ($a_perm == 'read') {
 			$arrClipMembers = (array)$this->clip->getMembers();
-			if (($ilAccess->checkAccess('write', '', $this->objScast->getRefId())) OR ($ilUser->getExternalAccount()
-					== $this->clip->getOwner() AND
+			if (($ilAccess->checkAccess('write', '', $this->objScast->getRefId())) OR ($ilUser->getExternalAccount() == $this->clip->getOwner() AND
 					$ilUser->getExternalAccount() != '' AND $this->clip->getOwner() != '')
 				OR is_numeric(array_search($ilUser->getId(), $arrClipMembers))
-				OR xscaGroup::checkSameGroup($this->objScast->getId(), $this->clip->getOwnerILIASId(), $ilUser->getId())
-				OR ($this->objScast->getIvt() == false
-					AND $ilAccess->checkAccess('read', '', $this->objScast->getRefId()))
+				OR xscaGroup::checkSameGroup($this->objScast->getId(), $this->clip->getOwnerILIASId(), $ilUser->getId()) OR ($this->objScast->getIvt()
+					== false AND $ilAccess->checkAccess('read', '', $this->objScast->getRefId()))
 			) {
 				return true;
 			}

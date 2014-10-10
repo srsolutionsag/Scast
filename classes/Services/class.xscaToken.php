@@ -5,7 +5,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 /**
  * xscaToken
  *
- * @author            Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author            Fabian Schmid <fs@studer-raimann.ch>
  * @version           $Id$
  */
 class xscaToken {
@@ -17,8 +17,7 @@ class xscaToken {
 	 * @return mixed
 	 */
 	static function _getPath() {
-		$path = str_ireplace($_SERVER['DOCUMENT_ROOT']
-			. '/', '', str_ireplace('/classes/class.xscaToken.php', '', __FILE__));
+		$path = str_ireplace($_SERVER['DOCUMENT_ROOT'] . '/', '', str_ireplace('/classes/class.xscaToken.php', '', __FILE__));
 
 		return $path;
 	}
@@ -28,8 +27,6 @@ class xscaToken {
 	 * @return mixed
 	 */
 	public static function _getWebUrl() {
-		$pl = new ilScastPlugin();
-
 		return xscaConfig::get('external_authority_host');
 	}
 
