@@ -262,6 +262,7 @@ class xscaClipGUI {
 			$clipmember = $this->clip_member_form->getInput('clipmember');
 			if ($clipmember > 0) {
 				$this->clip->addMember($clipmember);
+				xscaApiCache::flush($this->objScast->getId());
 				echo xscaClipMembersTableGUI::getNewRow($clipmember);
 				exit;
 			}
