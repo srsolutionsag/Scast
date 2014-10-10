@@ -566,7 +566,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$table_gui = new xscaClipTableGUI($this, 'showContent');
 		$table_gui->writeFilterToSession(); // writes filter to session
 		$table_gui->resetOffset(); // sets record offest to 0 (first page)
-		$this->showContent();
+		$this->ctrl->redirect($this, 'showContent');
+//		$this->showContent();
 	}
 
 
@@ -574,7 +575,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$table_gui = new xscaClipTableGUI($this, 'showContent');
 		$table_gui->resetOffset(); // sets record offest to 0 (first page)
 		$table_gui->resetFilter(); // clears filter
-		$this->showContent();
+		$this->ctrl->redirect($this, 'showContent');
+//		$this->showContent();
 	}
 
 
