@@ -44,7 +44,7 @@ class xscaClipGUI {
 		$this->user = $ilUser;
 		$this->access = $ilAccess;
 		$this->tabs = $ilTabs;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->objScast = $a_obj_scast;
 		$this->parent_gui = $a_obj_scast_gui;
 		if (! $a_clip_ext_id) {

@@ -135,7 +135,7 @@ class ilObjScast extends ilObjectPlugin {
 		parent::__construct($a_ref_id);
 		$this->xsca_user = xscaUser::getInstance($ilUser);
 		$this->organisation_domain = xscaOrganisation::getSysAccountByExtAccount($this->getSysAccount());
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->db = $ilDB;
 		$this->log = xscaLog::getInstance();
 	}
@@ -274,7 +274,7 @@ class ilObjScast extends ilObjectPlugin {
 			if (! is_object($this->db)) {
 				global $ilDB;
 				$this->db = $ilDB;
-				$this->pl = new ilScastPlugin();
+				$this->pl = ilScastPlugin::getInstance();
 			}
 			$set = $this->db->query('SELECT * FROM rep_robj_xsca_data ' . ' WHERE id = ' . $this->db->quote($this->getId(), 'integer'));
 			while ($rec = $this->db->fetchAssoc($set)) {

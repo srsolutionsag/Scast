@@ -51,6 +51,10 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 * @var ilTabsGUI
 	 */
 	protected $tabs_gui;
+	/**
+	 * @var ilAccessHandler
+	 */
+	protected $access;
 
 
 	/**
@@ -142,7 +146,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$this->ctrl = $ilCtrl;
 		$this->xsca_user = xscaUser::getInstance();
 		$this->tabs_gui = $ilTabs;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		if (exec('hostname') == 'ilias-webt1') {
 			$this->dev = true;
 		}
@@ -567,7 +571,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$table_gui->writeFilterToSession(); // writes filter to session
 		$table_gui->resetOffset(); // sets record offest to 0 (first page)
 		$this->ctrl->redirect($this, 'showContent');
-//		$this->showContent();
+		//		$this->showContent();
 	}
 
 
@@ -576,7 +580,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$table_gui->resetOffset(); // sets record offest to 0 (first page)
 		$table_gui->resetFilter(); // clears filter
 		$this->ctrl->redirect($this, 'showContent');
-//		$this->showContent();
+		//		$this->showContent();
 	}
 
 

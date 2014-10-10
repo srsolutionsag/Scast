@@ -46,7 +46,7 @@ class xscaGroupGUI {
 		 */
 		$this->ref_id = $_GET['ref_id'];
 		$this->scast = $scast;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->ctrl = $ilCtrl;
 		$this->tpl = $tpl;
 		$this->access = $ilAccess;

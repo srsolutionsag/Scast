@@ -34,7 +34,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 		$this->objScast = $a_obj_scastgui->object;
 		$this->setId('xsca_clips_' . $a_obj_scastgui->getScastObject()->getId());
 		$this->setPrefix('xsca_clips');
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->ctrl = $ilCtrl;
 		$this->user = $ilUser;
 		$this->access = $ilAccess;
