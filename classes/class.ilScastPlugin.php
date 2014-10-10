@@ -1,20 +1,19 @@
 <?php
 /* Copyright (c) 1998-2009 ILIAS open source, Extended GPL, see docs/LICENSE */
 
-require_once('Services/Repository/classes/class.ilRepositoryObjectPlugin.php');
+require_once('./Services/Repository/classes/class.ilRepositoryObjectPlugin.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/Scast/classes/Services/class.xscaLog.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/Scast/lib/simplexlsx.class.php');
 
 /**
- * Scast repository object plugin
+ * Class ilScastPlugin
  *
- * @author  Alex Killing <alex.killing@gmx.de>
  * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @version $Id$
- *
  */
 class ilScastPlugin extends ilRepositoryObjectPlugin {
 
+	const PLUGIN_NAME = 'Scast';
 	/**
 	 * @var ilDB
 	 */
@@ -23,6 +22,22 @@ class ilScastPlugin extends ilRepositoryObjectPlugin {
 	 * @var array
 	 */
 	protected static $cache = array();
+	/**
+	 * @var
+	 */
+	protected static $instance;
+
+
+	/**
+	 * @return ilScastPlugin
+	 */
+	public static function getInstance() {
+		if (! isset(self::$instance)) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
 
 
 	final function init() {
@@ -31,8 +46,11 @@ class ilScastPlugin extends ilRepositoryObjectPlugin {
 	}
 
 
+	/**
+	 * @return string
+	 */
 	public function getPluginName() {
-		return 'Scast';
+		return self::PLUGIN_NAME;
 	}
 
 
@@ -42,8 +60,7 @@ class ilScastPlugin extends ilRepositoryObjectPlugin {
 	 */
 	public function getAllSysAccounts() {
 		if (! isset(self::$cache['all_sys_accounts'])) {
-			$set = $this->db->query('SELECT value FROM rep_robj_xsca_conf WHERE name LIKE'
-				. $this->db->quote('%sysaccount', 'text'));
+			$set = $this->db->query('SELECT value FROM rep_robj_xsca_conf WHERE name LIKE' . $this->db->quote('%sysaccount', 'text'));
 			while ($rec = $this->db->fetchObject($set)) {
 				$return[] = $rec->value;
 			}
