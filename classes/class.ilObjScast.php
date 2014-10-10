@@ -11,7 +11,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/Scast/classes/Api/class.xscaApi.php');
 
 /**
- * Application class for Scast repository object.
+ * Class ilObjScast
  *
  * @author Martin Studer <ms@studer-raimann.ch>
  * @author Fabian Schmid <fs@studer-raimann.ch>
@@ -170,9 +170,13 @@ class ilObjScast extends ilObjectPlugin {
 	 * @return int
 	 */
 	public function lookupCourseId() {
+		/**
+		 * @var $tree ilTree
+		 */
 		global $tree;
 		if ($this->getRefId() > 0) {
-			$path_ids = $tree->getPathIdsUsingNestedSets($this->getRefId());
+//			$path_ids = $tree->getPathIdsUsingNestedSets($this->getRefId());
+			$path_ids = $tree->getPathFull($this->getRefId());
 		}
 		$id = 0;
 		if (is_array($path_ids) AND count($path_ids) > 0) {
