@@ -83,6 +83,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				$this->ctrl->forwardCommand($gui);
 				break;
 			default:
+				$this->initHeader(false);
 				parent::executeCommand();
 				break;
 		}
@@ -108,6 +109,9 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	}
 
 
+	/**
+	 * @param bool $clear_tabs
+	 */
 	protected function initHeader($clear_tabs = true) {
 		global $lng;
 		$this->tpl->setTitle($this->object->getTitle());
