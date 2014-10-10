@@ -175,10 +175,9 @@ class ilObjScast extends ilObjectPlugin {
 		 */
 		global $tree;
 		if ($this->getRefId() > 0) {
-//			$path_ids = $tree->getPathIdsUsingNestedSets($this->getRefId());
-			$path_ids = $tree->getPathFull($this->getRefId());
+			$path_ids = $tree->getPathId($this->getRefId());
 		}
-		$id = 0;
+
 		if (is_array($path_ids) AND count($path_ids) > 0) {
 			foreach ($path_ids as $ref_id) {
 				if (ilObject::_lookupType($ref_id, true) == 'crs') {
@@ -230,8 +229,8 @@ class ilObjScast extends ilObjectPlugin {
 				'name' => (string)$this->getTitle(),
 				'discipline_id' => (int)$this->getDisciplineId(),
 				'license' => (string)$this->getLicense(),
-				'author' => (string)$this->xsca_user->getIliasUserObject()->getFirstName() . ' '
-					. $this->xsca_user->getIliasUserObject()->getLastName(),
+				'author' =>
+					(string)$this->xsca_user->getIliasUserObject()->getFirstName() . ' ' . $this->xsca_user->getIliasUserObject()->getLastName(),
 				'department' => (string)$this->getDepartment(),
 				'organization_domain' => (string)$this->organisation_domain,
 				'access' => (string)'external_authority',
@@ -277,8 +276,7 @@ class ilObjScast extends ilObjectPlugin {
 				$this->db = $ilDB;
 				$this->pl = new ilScastPlugin();
 			}
-			$set = $this->db->query('SELECT * FROM rep_robj_xsca_data ' . ' WHERE id = '
-				. $this->db->quote($this->getId(), 'integer'));
+			$set = $this->db->query('SELECT * FROM rep_robj_xsca_data ' . ' WHERE id = ' . $this->db->quote($this->getId(), 'integer'));
 			while ($rec = $this->db->fetchAssoc($set)) {
 				$this->setExtId($rec['ext_id']);
 				$this->setIvt($rec['is_ivt']);
@@ -323,7 +321,6 @@ class ilObjScast extends ilObjectPlugin {
 	}
 
 
-
 	/**
 	 * @param bool $switch_only
 	 *
@@ -342,8 +339,7 @@ class ilObjScast extends ilObjectPlugin {
 			'name' => (string)$this->getTitle(),
 			'discipline_id' => (int)$this->getDisciplineId(),
 			'license' => (string)$this->getLicense(),
-			'autor' => (string)$this->xsca_user->getIliasUserObject()->getFirstName() . ' '
-				. $this->xsca_user->getIliasUserObject()->getLastName(),
+			'autor' => (string)$this->xsca_user->getIliasUserObject()->getFirstName() . ' ' . $this->xsca_user->getIliasUserObject()->getLastName(),
 			'department' => (string)$this->getDepartment(),
 			'access' => (string)'external_authority',
 			'external_authority_id' => (int)xscaConfig::get('scast_external_authority_id'),
@@ -377,8 +373,7 @@ class ilObjScast extends ilObjectPlugin {
 		if (! $this->hasReferencedChannels()) {
 			xscaApi::users($this->xsca_user->getExtAccount())->channels($this->getExtId())->delete();
 		}
-		$this->db->manipulate('DELETE FROM rep_robj_xsca_data WHERE ' . ' id = '
-			. $this->db->quote($this->getId(), 'integer'));
+		$this->db->manipulate('DELETE FROM rep_robj_xsca_data WHERE ' . ' id = ' . $this->db->quote($this->getId(), 'integer'));
 	}
 
 
@@ -866,8 +861,7 @@ class ilObjScast extends ilObjectPlugin {
 		global $ilAccess;
 		$xscaUser = xscaUser::getInstance(new ilObjUser($usr_id));
 		$xscaUser->create();
-		if ($xscaUser->isAllowedAsPublisher($this->organisation_domain)
-			AND $ilAccess->checkAccess('write', '', $this->getRefId())
+		if ($xscaUser->isAllowedAsPublisher($this->organisation_domain) AND $ilAccess->checkAccess('write', '', $this->getRefId())
 		) {
 			$this->addProducerByExtId($xscaUser->getExtAccount(), true);
 		}

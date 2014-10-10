@@ -137,24 +137,22 @@ class xscaGroupGUI {
 		$tpl->setVariable('GROUP_NAME', $group->getTitle());
 		$tpl->setVariable('GROUP_ID', $group->getId());
 		//Gruppenmitglieder sortieren
-		if($group->getMemberIds() )
-        {
-    		foreach ($group->getMemberIds() as $member_id) {
-    			$user = new ilObjUser($member_id);
-    			$arr_members[$user->getFullname()] = $member_id;
-    		}
-        }
-        if($arr_members)
-        {
-            @arsort($arr_members);
-            foreach ($arr_members as $member_id) {
-                $mt = $this->pl->getTemplate('default/tpl.groups.html');
-                $this->buildMemberTemplate($mt, $member_id);
-                $tpl->setCurrentBlock('memberplace');
-                $tpl->setVariable('MEMBER_PLACE', $mt->get());
-                $tpl->parseCurrentBlock();
-            }
-        }
+		if ($group->getMemberIds()) {
+			foreach ($group->getMemberIds() as $member_id) {
+				$user = new ilObjUser($member_id);
+				$arr_members[$user->getFullname()] = $member_id;
+			}
+		}
+		if ($arr_members) {
+			@arsort($arr_members);
+			foreach ($arr_members as $member_id) {
+				$mt = $this->pl->getTemplate('default/tpl.groups.html');
+				$this->buildMemberTemplate($mt, $member_id);
+				$tpl->setCurrentBlock('memberplace');
+				$tpl->setVariable('MEMBER_PLACE', $mt->get());
+				$tpl->parseCurrentBlock();
+			}
+		}
 		$tpl->parseCurrentBlock();
 	}
 

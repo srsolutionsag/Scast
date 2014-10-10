@@ -144,7 +144,7 @@ class xscaClip {
 		 */
 		$this->log = xscaLog::getInstance();
 		$this->db = $ilDB;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->setChannelExtId($channel_ext_id);
 		$this->setExtId($clip_ext_id);
 		$this->xsca_user = xscaUser::getInstance($ilUser);

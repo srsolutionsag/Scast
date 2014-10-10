@@ -75,11 +75,11 @@ class xscaGroup {
 		 * @var $ilDB ilDB
 		 */
 		$groups = array();
-		$query = 'SELECT id FROM rep_robj_xsca_group WHERE scast_id = '
-			. $ilDB->quote($obj_id, 'integer') . ' ORDER by Title';
+		$query = 'SELECT id FROM rep_robj_xsca_group WHERE scast_id = ' . $ilDB->quote($obj_id, 'integer') . ' ORDER by Title ASC';
 		$set = $ilDB->query($query);
 		while ($rec = $ilDB->fetchObject($set)) {
-			$groups[$rec->id] = xscaGroup::getInstance($rec->id);
+			//$rec->id
+			$groups[] = xscaGroup::getInstance($rec->id);
 		}
 
 		return $groups;
@@ -135,9 +135,8 @@ class xscaGroup {
 		$next_id = $this->db->nextId('rep_robj_xsca_group');
 		$this->setId($next_id);
 		$this->db->manipulate('INSERT INTO rep_robj_xsca_group
-        (id, title, scast_id) VALUES (' . $this->db->quote($next_id, 'integer') . ', '
-			. $this->db->quote($this->getTitle(), 'text') . ', ' . $this->db->quote($this->getScastId(), 'integer')
-			. ')');
+        (id, title, scast_id) VALUES (' . $this->db->quote($next_id, 'integer') . ', ' . $this->db->quote($this->getTitle(), 'text') . ', '
+			. $this->db->quote($this->getScastId(), 'integer') . ')');
 	}
 
 
@@ -186,8 +185,7 @@ class xscaGroup {
 	public function addMemberById($usr_id) {
 		if (! in_array($usr_id, $this->getMemberIds())) {
 			$this->memberIds[] = $usr_id;
-			$this->db->manipulate('INSERT INTO rep_robj_xsca_grp_usr (group_id, usr_id) VALUES (' . $this->getId()
-				. ', ' . $usr_id . ')');
+			$this->db->manipulate('INSERT INTO rep_robj_xsca_grp_usr (group_id, usr_id) VALUES (' . $this->getId() . ', ' . $usr_id . ')');
 
 			return true;
 		}
@@ -202,8 +200,7 @@ class xscaGroup {
 	public function removeMemberById($usr_id) {
 		if (! (($key = array_search($usr_id, $this->getMemberIds())) === false)) {
 			unset($this->memberIds[$key]);
-			$this->db->manipulate('DELETE FROM rep_robj_xsca_grp_usr WHERE group_id = ' . $this->getId()
-				. ' AND usr_id = ' . $usr_id);
+			$this->db->manipulate('DELETE FROM rep_robj_xsca_grp_usr WHERE group_id = ' . $this->getId() . ' AND usr_id = ' . $usr_id);
 		}
 	}
 
