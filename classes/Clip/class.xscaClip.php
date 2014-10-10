@@ -8,7 +8,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 /**
  * Class xscaClip
  *
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @author  Martin Studer <ms@studer-raimann.ch>
  * @version $Id:
  *
@@ -144,7 +144,7 @@ class xscaClip {
 		 */
 		$this->log = xscaLog::getInstance();
 		$this->db = $ilDB;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->setChannelExtId($channel_ext_id);
 		$this->setExtId($clip_ext_id);
 		$this->xsca_user = xscaUser::getInstance($ilUser);

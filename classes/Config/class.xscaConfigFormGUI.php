@@ -29,7 +29,7 @@ class xscaConfigFormGUI extends ilPropertyFormGUI {
 		global $ilCtrl;
 		$this->parent_gui = $parent_gui;
 		$this->ctrl = $ilCtrl;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		if ($_GET['hrl'] == 'true') {
 			$this->pl->updateLanguageFiles();
 		}

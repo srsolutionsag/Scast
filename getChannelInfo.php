@@ -3,7 +3,7 @@
  * getChannelInfo
  *
  * @author  Oskar Truffer <ot@studer-raimann.ch>
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @version $Id:
  *
  */

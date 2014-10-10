@@ -33,7 +33,7 @@ class xscaClipFormGUI extends ilPropertyFormGUI {
 		$this->clip = $clip;
 		$this->parent_gui = $parent_gui;
 		$this->ctrl = $ilCtrl;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->ctrl->saveParameter($parent_gui, 'clip_ext_id');
 		$this->initForm();
 	}

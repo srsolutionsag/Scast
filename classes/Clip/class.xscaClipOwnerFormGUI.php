@@ -33,7 +33,7 @@ class xscaClipOwnerFormGUI extends ilPropertyFormGUI {
 		$this->clip = $clip;
 		$this->parent_gui = $parent_gui;
 		$this->ctrl = $ilCtrl;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->ctrl->saveParameter($parent_gui, 'clip_ext_id');
 		$this->initForm();
 	}
@@ -47,7 +47,7 @@ class xscaClipOwnerFormGUI extends ilPropertyFormGUI {
 			$this->setTitle($this->pl->txt('edit_owner'));
 		}
 		// Form
-		$ilParticipants = new ilParticipants($this->clip->->getCourseId());
+		$ilParticipants = new ilParticipants($this->clip->getCourseId());
 		$arr_participants = array();
 		$arr_participants[''] = '--' . $this->pl->txt('not_assigned') . '--';
 		foreach ($ilParticipants->getParticipants() as $user_id) {

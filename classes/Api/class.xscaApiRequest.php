@@ -7,7 +7,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 /**
  * Class xscaApiRequest
  *
- * @author  Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author  Fabian Schmid <fs@studer-raimann.ch>
  * @author  Martin Studer <ms@studer-raimann.ch>
  * @version $Id:
  *
@@ -150,7 +150,7 @@ class xscaApiRequest {
 		curl_setopt($this->curl, CURLOPT_HTTPHEADER, array( "Content-Type: text/xml" ));
 		curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $this->getMethod());
 		curl_setopt($this->curl, CURLOPT_TIMEOUT_MS, 10000);
-        
+
 		if (xscaConfig::get('castkey_password')) {
 			curl_setopt($this->curl, CURLOPT_SSLKEYPASSWD, xscaConfig::get('castkey_password'));
 		}
@@ -182,8 +182,7 @@ class xscaApiRequest {
 	public function getBackTrace() {
 		$return = '';
 		foreach (debug_backtrace() as $bt) {
-			if (! in_array($bt['function'], array( 'getBackTrace', 'executeCommand', 'performCommand' ))
-				AND ! in_array($bt['class'], array(
+			if (! in_array($bt['function'], array( 'getBackTrace', 'executeCommand', 'performCommand' )) AND ! in_array($bt['class'], array(
 					'xscaApiRequest',
 					'ilCtrl',
 					'xscaApiCollection',
@@ -216,7 +215,10 @@ class xscaApiRequest {
 			return false;
 		}
 		if ($this->getReturnValue()->message) {
-			ilUtil::sendFailure((string)$this->getReturnValue()->message, true);
+			if (! preg_match("/Clip\\[([1-9a-zA_Z]*)\\] was successfully deleted/uism", (string)$this->getReturnValue()->message)) {
+				ilUtil::sendFailure((string)$this->getReturnValue()->message, true);
+			}
+
 			if (xscaConfig::get('show_api_debug')) {
 				ilUtil::sendFailure($this->getOutput() . '<br>' . $this->getBackTrace(), true);
 			}
@@ -311,8 +313,7 @@ class xscaApiRequest {
 
 
 	protected function appendDebugCache() {
-		self::$debug_cache[] =
-			'<strong>' . $this->getMethod() . ': ' . $this->getUrl() . '</strong><br>' . $this->getBackTrace();
+		self::$debug_cache[] = '<strong>' . $this->getMethod() . ': ' . $this->getUrl() . '</strong><br>' . $this->getBackTrace();
 	}
 }
 

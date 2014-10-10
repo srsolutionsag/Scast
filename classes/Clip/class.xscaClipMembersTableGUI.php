@@ -27,7 +27,7 @@ class xscaClipMembersTableGUI extends ilTable2GUI {
 		 * @var  $ilCtrl ilCtrl
 		 */
 		$this->ctrl = $ilCtrl;
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->objScast = $a_obj_scast;
 		$ilObjScastGUI = new ilObjScastGUI($this->objScast->getRefId());
 		//		$this->objClip = new xscaClip($this->objScast, $_GET['clip_ext_id']);
@@ -74,7 +74,7 @@ class xscaClipMembersTableGUI extends ilTable2GUI {
 		/**
 		 * @var $ilCtrl ilCtrl
 		 */
-		$pl = new ilScastPlugin();
+		$pl = ilScastPlugin::getInstance();
 		$tpl = $pl->getTemplate('default/tpl.clipmembers_table.html');
 		$user = new ilObjUser($user_id);
 		$tpl->setVariable('NAME', $user->getFullname());

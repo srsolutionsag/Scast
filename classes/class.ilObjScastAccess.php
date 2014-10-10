@@ -9,7 +9,7 @@ include_once('./Services/Repository/classes/class.ilObjectPluginAccess.php');
  * Please do not create instances of large application classes (like ilObjScast)
  * Write small methods within this class to determin the status.
  *
- * @author        Fabian Schmid <fabian.schmid@ilub.unibe.ch>
+ * @author        Fabian Schmid <fs@studer-raimann.ch>
  * @version       $Id$
  */
 class ilObjScastAccess extends ilObjectPluginAccess {

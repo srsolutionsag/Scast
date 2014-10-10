@@ -34,7 +34,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 		$this->objScast = $a_obj_scastgui->object;
 		$this->setId('xsca_clips_' . $a_obj_scastgui->getScastObject()->getId());
 		$this->setPrefix('xsca_clips');
-		$this->pl = new ilScastPlugin();
+		$this->pl = ilScastPlugin::getInstance();
 		$this->ctrl = $ilCtrl;
 		$this->user = $ilUser;
 		$this->access = $ilAccess;
@@ -52,8 +52,8 @@ class xscaClipTableGUI extends ilTable2GUI {
 		// Nur falls Schreibberechtigt und falls External-Account (SWITCHaai vorhanden)
 		if (ilObjScastAccess::checkSwitchCastUseage()) {
 			$this->toolbar->addButton($this->pl->txt('add_clip'), $this->objScast->getUploadForm(), '_blank');
-			$this->toolbar->addButton($this->pl->txt('reload_clips'), $this->ctrl->getLinkTarget($this->objScastGui, 'reloadCache'), '', '', '', 'reloadCache');
 		}
+		$this->toolbar->addButton($this->pl->txt('reload_clips'), $this->ctrl->getLinkTarget($this->objScastGui, 'reloadCache'), '', '', '', 'reloadCache');
 		$arrSelectedColumns = $this->getSelectedColumns();
 		$this->addColumn($this->pl->txt('preview'), '', '170px');
 		$this->addColumn($this->pl->txt('clips'), '', '120px');
