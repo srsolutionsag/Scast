@@ -8,3 +8,11 @@ Scast is a ILIAS-Plugin for the Swiss Podcast- and Annotation-Service SwitchCast
 Installation
 -----
 Please contact fs@studer-raimann.ch concerning the Installation of the Plugin. You will need additional information from Switch.
+
+Contact
+-----
+studer + raimann ag
+Waldeggstrasse 72
+3097 Liebefeld
+info@studer-raimann.ch
+www.studer-raimann.ch
