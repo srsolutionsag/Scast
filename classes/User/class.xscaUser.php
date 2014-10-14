@@ -40,9 +40,6 @@ class xscaUser {
 	 * @var xscaUser[]
 	 */
 	protected static $cache = array();
-
-
-
 	//
 	// Factory
 	//
@@ -72,11 +69,11 @@ class xscaUser {
 	 * @return xscaUser
 	 */
 	public static function getInstance(ilObjUser $ilUser = NULL) {
-		if (! $ilUser) {
+		if (!$ilUser) {
 			global $ilUser;
 		}
 		$usr_id = $ilUser->getId();
-		if (! isset(self::$cache[$usr_id])) {
+		if (!isset(self::$cache[$usr_id])) {
 			self::$cache[$usr_id] = new self($ilUser);
 		}
 
@@ -121,7 +118,7 @@ class xscaUser {
 	/**
 	 * @return bool
 	 */
-	public function isAllowedToUseSwitchCast(){
+	public function isAllowedToUseSwitchCast() {
 		return xscaOrganisation::hasSysAccount($this->getExtAccount());
 	}
 
@@ -162,14 +159,19 @@ class xscaUser {
 
 	/**
 	 * @param bool $sort
+	 * @param bool $from_same_origin
 	 *
 	 * @return array
 	 */
-	public function getChannelsOfUser($sort = false) {
+	public function getChannelsOfUser($sort = false, $from_same_origin = false) {
 		$channels = xscaApi::users($this->getExtAccount())->channels()->get();
 		$flds = array();
 		foreach ($channels->channel as $ch) {
 			$ch = (array)$ch;
+
+			if ($from_same_origin) {
+				//				$channel = xscaApi::users($this->getExtAccount())->channels($ch['ext_id'])->get();
+			}
 			$id = $ch['ext_id'];
 			$name = $ch['name'];
 			$flds[$id] = $name;
@@ -195,7 +197,13 @@ class xscaUser {
 	//
 	// CRUD
 	//
+	/**
+	 * @return bool
+	 */
 	public function create() {
+		if ($this->exists()) {
+			return false;
+		}
 		$api = xscaApi::users();
 		$data = new xscaApiData('user');
 		$data->setFields(array(
@@ -207,14 +215,30 @@ class xscaUser {
 		));
 		$api->post($data);
 		xscaLog::getInstance()->write('User registered: ' . $this->getExtAccount(), xscaLog::LEVEL_DEBUG);
+
+		return true;
 	}
 
 
+	/**
+	 * @return bool
+	 */
+	public function exists() {
+		$api = xscaApi::users($this->getExtAccount())->get();
+
+		return ((string)$api->request_status != '400');
+	}
+
+
+	/**
+	 * @deprecated
+	 */
 	public function update() {
 		// http://help.switch.ch/cast/integration/api_specification.html
 		// Update/delete users is currently not supported
 		$this->create();
 	}
+
 
 
 	//
