@@ -11,12 +11,19 @@ class xscaConfig extends AR {
 	const GOTO_LOGIN = 1;
 	const GOTO_REPO = 2;
 	const ALLOW_UPLOAD_TOKEN = 'allow_upload_token';
-	const F_EULA_TEXT = 'config_scast_eula_text';
+	const F_EULA_TEXT = 'eula_text';
+	const F_GOTO = 'goto';
+	const F_CREATE_BY_SYS = 'create_by_sys';
+	const F_SHOW_API_DEBUG = 'show_api_debug';
+	const F_DEACTIVATE_IVT = 'deactivate_ivt';
+	const F_DEACTIVATE_GET_EXISTING = 'deactivate_get_existing';
+	const F_DEFAULT_SYSACCOUNT = 'default_sysaccount';
+	const F_USE_EULA = 'use_eula';
+	const F_DISABLE_CACHE = 'disable_cache';
 
 
 	/**
 	 * @return string
-	 * @description Return the Name of your Database Table
 	 */
 	static function returnDbTableName() {
 		return 'rep_robj_xsca_conf';
@@ -42,7 +49,6 @@ class xscaConfig extends AR {
 	public static function set($name, $value) {
 		$obj = new self($name);
 		$obj->setValue($value);
-//		var_dump(self::where(array( 'name' => $name ))->hasSets()); // FSX
 		if (self::where(array( 'name' => $name ))->hasSets()) {
 			$obj->update();
 		} else {

@@ -7,14 +7,20 @@ add_member#:#Mitglied hinzufügen
 add_Member#:#Mitglied hinzufügen
 add_member#:#Mitglied hinzufügen
 admin_config_allow_test_channels#:#Testchannels erlauben
+admin_config_form_button_save#:#Speichern
+admin_config_form_button_cancel#:#Abbrechen
+admin_config_form_title#:#Einstellungen
+admin_config_form_description#:#Einstellungen zur Anbindung an SwitchCast
+admin_config_disable_cache#:#Cache deaktivieren
+admin_config_disable_cache_info#:#Requests werden nicht mehr gecached
 admin_config_allow_test_channels_info#:#Systemweit Testchannels erlauben
 admin_config_cacrt_file_info#:#Certificate authority
 admin_config_castkey_file_info#:#SWITCH-Cast Zertifikat, setzen Sie sich mit Switch in Verbindung, um dieses zertifikat zu erhalten
 admin_config_castkey_password_info#:#Optional
 admin_config_castkeypassword#:#Zertifikats-Passwort
 admin_config_castkeypassword_info#:#SwitchCast Zertifikats-Passwort (falls vorhanden)
-admin_config_create_default_sysaccount#:#Channels mit Default-System-Account anlegen
-admin_config_create_default_sysaccount_info#:#Hinterlegter Default-System-Account verwenden, um neue Channels zu generieren. Dies funktioniert nur mit entsprechend berechtigten System-Accounts. In der Regel auf Plattformen, welche nicht über AAI verfügen. Normalerweise sollte diese Funktion nicht genutzt werden, da der entsprechend eingeloggte Benutzer Channels eröffnen soll.
+admin_config_create_by_sys#:#Channels mit Default-System-Account anlegen
+admin_config_create_by_sys_info#:#Hinterlegter Default-System-Account verwenden, um neue Channels zu generieren. Dies funktioniert nur mit entsprechend berechtigten System-Accounts. In der Regel auf Plattformen, welche nicht über AAI verfügen. Normalerweise sollte diese Funktion nicht genutzt werden, da der entsprechend eingeloggte Benutzer Channels eröffnen soll.
 admin_config_crt_file_info#:#SWITCH-Cast Zertifikat, setzen Sie sich mit Switch in Verbindung, um dieses zertifikat zu erhalten
 admin_config_deactivate_get_existing#:#Existierende Channels anzeigen auschalten
 admin_config_deactivate_get_existing_info#:#Deaktivieren der Funktionalität, dass bereits vorhandene Channels hinzugefügt werden können, bspw. wenn ausschliesslich mit einem System-Account gearbeitet wird.
@@ -44,7 +50,8 @@ admin_config_scast_configuration_id#:#Standard-Konfigurations-ID
 admin_config_scast_metadata_export#:#Metadata Export
 admin_config_scast_scast_access#:#Authentifizierungs-Methode (external_authority)
 admin_config_scast_streaming_configuration_id#:#Streaming-Konfigurations-ID
-admin_config_scast_use_eula#:#Nutzungsvereinbarung anzeigen
+admin_config_use_eula#:#Nutzungsvereinbarung anzeigen
+admin_config_use_eula_info#:#Nutzungsvereinbarung anzeigen
 admin_config_show_api_debug#:#Debug-Informationen anzeigen
 admin_config_show_api_debug_info#:#Zeigt alle Requests auf die SwitchCast-Schnittstelle als Info an
 admin_config_sysaccount_eth_ch#:#ETH
@@ -99,9 +106,10 @@ clip_status_preparing#:#Clip wird aufbereitet, für Studierende noch nicht sicht
 clip_status_processing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
 clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips#:#Clips
-configure#:#SwitchCast konfigurieren
-content#:#Inhalt
-context#:#Kontext
+tab_configure#:#SwitchCast konfigurieren
+tab_content#:#Inhalt
+tab_user#:#Benutzer löschen
+tab_context#:#Kontext
 create_a_group#:#Bitte erstellen Sie zuerst eine Gruppe.
 crs_create_xsca#:#SWITCHCast Channel anlegen
 cut_switch#:#Clip schneiden
@@ -112,9 +120,9 @@ department#:#Department
 department_desc#:#How is the name of your department?
 description#:#Beschreibung
 discipline_0#:#Disziplin
-discipline_0_desc#:# 
-discipline_0_desc#:# 
-discipline_0_desc#:# 
+discipline_0_desc#:#
+discipline_0_desc#:#
+discipline_0_desc#:#
 discipline_1#:#Disziplin
 discipline_2#:#Disziplin
 dont_allow_annotations#:#Keine Annotationen
@@ -139,7 +147,6 @@ group#:#Gruppe
 groups#:#Gruppen
 grp_create_xsca#:#SWITCHCast Channel anlegen
 has_references#:#Dieser SWITCHcast-Channel wird in ILIAS mehrfach verwendet. Änderungen, welche Sie hier vornehmen, werden auf alle Referenzen übertragen!
-has_references#:#Der Channel wurde in ILIAS an mehreren Stellen eingebunden.
 import_xml#:#Einstellungen als XML importieren
 introduction_text#:#Arbeitsanweisung
 ipod#:#Mobile
@@ -149,7 +156,7 @@ lifetime_of_content_in_months#:#Intended lifetime of content
 lifetime_of_content_in_months_desc#:#How long shoud the video material be published?
 location#:#Ort
 member#:#Mitglied
-msg_obj_modified#:#Änderungen gespeichert
+msg_obj_modified#:#nderungen gespeichert
 msg_reload_clips#:#Die Clips werden neu geladen. Dies kann einen Moment dauern.
 new_channel#:#New Channel
 no_channels_available#:#Es sind keine vorhandenen Channels verfügbar.
@@ -178,10 +185,8 @@ remove#:#Entfernen
 rep_robj_xsca_obj_xsca#:#SWITCHcast Channel
 rep_robjs_xsca_obj_xsca#:#SWITCHcast Channels
 save#:#Speichern
-scast_plugin_configuration#:#Einstellungen
 select_a_group#:#Wählen Sie eine Gruppe.
 select_existing_channel#:#Wählen Sie einen bestehenden Channel
-settings_description#:#Einstellungen zur Anbindung an SwitchCast
 status#:#Status
 streaming_only#:#Ausschliesslich Streaming
 success_edit#:#Gespeichert
@@ -195,24 +200,3 @@ xsca_new#:#Einen neuen SWITCHcast Channel erstellen
 xsca_read#:#Lesezugriff: Lesezugriff auf Channel
 xsca_visible#:#Anzeigen: Channel ist sichtbar
 xsca_write#:#Bearbeiten: Channel-Einstellungen bearbeiten
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#

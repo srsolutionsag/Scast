@@ -87,7 +87,7 @@ class xscaApiCache extends AR {
 	 */
 	public static function add($key, $value, $type = NULL) {
 		$key = self::key($key);
-		if (! self::where(array( 'cache_key' => $key ))->hasSets()) {
+		if (!self::where(array( 'cache_key' => $key ))->hasSets()) {
 			$obj = new self();
 			switch (get_class($value)) {
 				case 'SimpleXMLElement':
@@ -118,8 +118,8 @@ class xscaApiCache extends AR {
 	 * @return mixed
 	 */
 	public static function getLastUpdate($obj_id) {
-		return self::where(array( 'obj_id' => $obj_id, 'type' => self::TYPE_CLIP ))->orderBy('cache_time', 'DESC')
-			->limit(0, 1)->first()->getCacheTime();
+		return self::where(array( 'obj_id' => $obj_id, 'type' => self::TYPE_CLIP ))->orderBy('cache_time', 'DESC')->limit(0, 1)->first()
+			->getCacheTime();
 	}
 
 
@@ -165,6 +165,9 @@ class xscaApiCache extends AR {
 	 * @return bool|stdClass|SimpleXMLElement
 	 */
 	public static function get($key, $type = NULL, $as_object = false) {
+		if (xscaConfig::get(xscaConfig::F_DISABLE_CACHE)) {
+			return false;
+		}
 		$key = self::key($key);
 		$return = false;
 		$where['cache_key'] = $key;
@@ -174,7 +177,7 @@ class xscaApiCache extends AR {
 			 * @var $obj xscaApiCache
 			 */
 			$obj = self::where($where, $op)->first();
-			if(is_object($obj)) {
+			if (is_object($obj)) {
 				switch ($obj->getDataType()) {
 					case 0;
 					case self::DATA_TYPE_XML:
@@ -186,7 +189,6 @@ class xscaApiCache extends AR {
 						break;
 				}
 			}
-
 		}
 		if ($as_object) {
 			return $obj;

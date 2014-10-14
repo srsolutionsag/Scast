@@ -182,7 +182,7 @@ class xscaApiRequest {
 	public function getBackTrace() {
 		$return = '';
 		foreach (debug_backtrace() as $bt) {
-			if (! in_array($bt['function'], array( 'getBackTrace', 'executeCommand', 'performCommand' )) AND ! in_array($bt['class'], array(
+			if (!in_array($bt['function'], array( 'getBackTrace', 'executeCommand', 'performCommand' )) AND !in_array($bt['class'], array(
 					'xscaApiRequest',
 					'ilCtrl',
 					'xscaApiCollection',
@@ -215,12 +215,13 @@ class xscaApiRequest {
 			return false;
 		}
 		if ($this->getReturnValue()->message) {
-			if (! preg_match("/Clip\\[([1-9a-zA_Z]*)\\] was successfully deleted/uism", (string)$this->getReturnValue()->message)) {
+			if (!preg_match("/Clip\\[([1-9a-zA_Z]*)\\] was successfully deleted/uism", (string)$this->getReturnValue()->message)) {
 				ilUtil::sendFailure((string)$this->getReturnValue()->message, true);
 			}
 
 			if (xscaConfig::get('show_api_debug')) {
 				ilUtil::sendFailure($this->getOutput() . '<br>' . $this->getBackTrace(), true);
+//				var_dump($this->getOutput() . '<br>' . $this->getBackTrace()); // FSX
 			}
 
 			return false;
