@@ -25,7 +25,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
  */
 class ilObjScastGUI extends ilObjectPluginGUI {
 
-	const CHANNEL_ID = 'channel_id';
+	const F_CHANNEL_ID = 'channel_id';
 	const REF_ID = 'ref_id';
 	/**
 	 * @var ilObjScast
@@ -55,6 +55,35 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 * @var ilAccessHandler
 	 */
 	protected $access;
+
+
+	/**
+	 * @param int $a_ref_id
+	 * @param int $a_id_type
+	 * @param int $a_parent_node_id
+	 */
+	public function __construct($a_ref_id = 0, $a_id_type = self::REPOSITORY_NODE_ID, $a_parent_node_id = 0) {
+		parent::__construct($a_ref_id, $a_id_type, $a_parent_node_id);
+		global $tpl, $ilCtrl, $ilAccess, $ilNavigationHistory, $ilTabs, $ilUser;
+		/**
+		 * @var $tpl                 ilTemplate
+		 * @var $ilCtrl              ilCtrl
+		 * @var $ilAccess            ilAccessHandler
+		 * @var $ilNavigationHistory ilNavigationHistory
+		 * @var $ilTabs              ilTabsGUI
+		 */
+		$this->tpl = $tpl;
+		$this->log = xscaLog::getInstance();
+		$this->history = $ilNavigationHistory;
+		$this->access = $ilAccess;
+		$this->ctrl = $ilCtrl;
+		$this->xsca_user = xscaUser::getInstance();
+		$this->tabs_gui = $ilTabs;
+		$this->pl = ilScastPlugin::getInstance();
+		if (exec('hostname') == 'ilias-webt1' OR $_GET['devmode'] OR xscaConfig::get('show_api_debug')) {
+			$this->dev = true;
+		}
+	}
 
 
 	/**
@@ -118,6 +147,9 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 */
 	protected function initHeader($clear_tabs = true) {
 		global $lng;
+		if (!$this->object instanceof ilObjScast) {
+			return false;
+		}
 		$this->tpl->setTitle($this->object->getTitle());
 		$this->tpl->setDescription($this->object->getDescription());
 		$this->tpl->setTitleIcon(ilObject::_getIcon(ilObject::_lookupObjId($_GET[self::REF_ID]), "big"), $lng->txt("obj_"
@@ -126,29 +158,6 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		if ($clear_tabs) {
 			$this->tabs_gui->clearTargets();
 			$this->tabs_gui->setBackTarget($this->pl->txt('back_to_list'), $this->ctrl->getLinkTarget($this, 'showContent'));
-		}
-	}
-
-
-	protected function afterConstructor() {
-		global $tpl, $ilCtrl, $ilAccess, $ilNavigationHistory, $ilTabs, $ilUser;
-		/**
-		 * @var $tpl                 ilTemplate
-		 * @var $ilCtrl              ilCtrl
-		 * @var $ilAccess            ilAccessHandler
-		 * @var $ilNavigationHistory ilNavigationHistory
-		 * @var $ilTabs              ilTabsGUI
-		 */
-		$this->tpl = $tpl;
-		$this->log = xscaLog::getInstance();
-		$this->history = $ilNavigationHistory;
-		$this->access = $ilAccess;
-		$this->ctrl = $ilCtrl;
-		$this->xsca_user = xscaUser::getInstance();
-		$this->tabs_gui = $ilTabs;
-		$this->pl = ilScastPlugin::getInstance();
-		if (exec('hostname') == 'ilias-webt1') {
-			$this->dev = true;
 		}
 	}
 
@@ -235,15 +244,13 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 
 	public function create() {
 		global $rbacsystem, $lng;
-		/**
-		 * @var $ilUser ilObjUser
-		 */
 		$this->object = new ilObjScast();
-		if (! $rbacsystem->checkAccess('create', $_GET[self::REF_ID], $this->object->getType()) OR ! $this->xsca_user->hasSystemAccount()
+		if (!$rbacsystem->checkAccess('create', $_GET[self::REF_ID], $this->object->getType()) OR !$this->xsca_user->hasSystemAccount()
 		) {
 			ilUtil::sendFailure($lng->txt('no_permission'));
 		} else {
 			$this->ctrl->setParameter($this, 'new_type', $this->object->getType());
+			$this->xsca_user->create();
 			$this->initPropertiesForm('create');
 			$this->tpl->setContent($this->form->getHTML());
 		}
@@ -252,12 +259,12 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 
 	public function save() {
 		global $rbacsystem;
-		if (! $rbacsystem->checkAccess('create', $_GET[self::REF_ID], self::getType())) {
+		if (!$rbacsystem->checkAccess('create', $_GET[self::REF_ID], self::getType())) {
 			$this->ilias->raiseError($this->lng->txt('no_create_permission'), $this->ilias->error_obj->MESSAGE);
 		}
 		$this->ctrl->setParameter($this, 'new_type', self::getType());
 		$this->initPropertiesForm('create', self::getType());
-		if (xscaConfig::get('config_scast_use_eula')) {
+		if (xscaConfig::get(xscaConfig::F_USE_EULA)) {
 			$eula = $this->form->getInput('accept_eula', false);
 		} else {
 			$eula = true;
@@ -279,9 +286,14 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$newObj->setChannelKind($this->form->getInput('channel_kind'));
 			// Falls bestehender Channel
 			if ($this->form->getInput('channel_type') == '2') {
-				$newObj->setExtId($this->form->getInput(self::CHANNEL_ID));
+				$newObj->setExtId($this->form->getInput(self::F_CHANNEL_ID));
 			}
-			$newObj->create();
+			try {
+
+				$newObj->create();
+			} catch (Exception $e) {
+				return false;
+			}
 			$newObj->createReference();
 			$newObj->putInTree($_GET[self::REF_ID]);
 			$newObj->setPermissions($_GET[self::REF_ID]);
@@ -289,7 +301,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$this->afterSave($newObj);
 
 			return;
-		} elseif (! $eula) {
+		} elseif (!$eula) {
 			global $lng;
 			/**
 			 * @var $input ilCheckboxInputGUI
@@ -329,7 +341,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		}
 		$this->form = new ilPropertyFormGUI();
 		// Channel
-		if (! $edit_mode) {
+		if (!$edit_mode) {
 			// Channel
 			$radio_prop = new ilRadioGroupInputGUI($this->txt('channel'), 'channel_type');
 			$op = new ilRadioOption($this->txt('new_channel'), '1', '');
@@ -345,9 +357,9 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				$op->addSubItem($cb_prop);
 			}
 			// Existing Channel
-			if (! xscaConfig::get('deactivate_get_existing')) {
+			if (!xscaConfig::get('deactivate_get_existing')) {
 				$op2 = new ilRadioOption($this->txt('existing_channel'), '2', '');
-				$cb_prop = new ilSelectInputGUI($this->txt('select_existing_channel'), self::CHANNEL_ID);
+				$cb_prop = new ilSelectInputGUI($this->txt('select_existing_channel'), self::F_CHANNEL_ID);
 				$cb_prop->setOptions($this->xsca_user->getChannelsOfUser(true));
 				$op2->addSubItem($cb_prop);
 				if (count($this->xsca_user->getChannelsOfUser(true)) == 0) {
@@ -443,8 +455,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$opt = new ilRadioOption($this->txt('allow_annotations'), 1);
 		$annot_type->addOption($opt);
 		$this->form->addItem($annot_type);
-		//Streaming Only: Nur editierbar, falls neue Channels generiert werden. Dies ändert das SWITCHcast-Template. Dies sollte man
-		//nicht bei bestehenden Channel tun.
+		// Streaming Only: Nur editierbar, falls neue Channels generiert werden. Dies ändert das SWITCHcast-Template. Dies sollte man
+		// nicht bei bestehenden Channel tun.
 		$cb = new ilCheckboxInputGUI($this->txt('streaming_only'), 'streaming_only');
 		if ($edit_mode) {
 			$cb->setDisabled(true);
@@ -452,7 +464,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$cb->setValue(1);
 		$this->form->addItem($cb);
 		// Type (IVT or Scast)
-		if (! xscaConfig::get('deactivate_ivt')) {
+		if (!xscaConfig::get('deactivate_ivt')) {
 			$cb = new ilCheckboxInputGUI($this->txt('clip_based_rightmanagement'), 'clip_based_rightmanagement');
 			$cb->setInfo($this->txt('clip_based_rightmanagement_desc'));
 			$cb->setValue(1);
@@ -462,17 +474,17 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$this->form->addItem($cb);
 		}
 		// EULA
-		if (xscaConfig::get('config_scast_use_eula') AND ! $edit_mode) {
+		if (xscaConfig::get(xscaConfig::F_USE_EULA) AND !$edit_mode) {
 			$cb = new ilCheckboxInputGUI($this->pl->txt('accept_eula'), 'accept_eula');
 			$cb->setRequired(true);
-			$cb->setInfo(xscaConfig::get('config_scast_eula_text'));
+			$cb->setInfo(xscaConfig::get(xscaConfig::F_EULA_TEXT));
 			//			$cb->setValue(1);
 			$this->form->addItem($cb);
 		}
 		//
 		if ($edit_mode) {
 			// channel_id
-			$ne = new ilNonEditableValueGUI($this->txt(self::CHANNEL_ID), self::CHANNEL_ID);
+			$ne = new ilNonEditableValueGUI($this->txt(self::F_CHANNEL_ID), self::F_CHANNEL_ID);
 			$ne->setValue($this->object->getExtId());
 			$this->form->addItem($ne);
 			$ci = new ilCustomInputGUI($this->txt('edit_switchcast_channel'), 'channel_link');

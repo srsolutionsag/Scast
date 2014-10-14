@@ -211,6 +211,7 @@ class ilObjScast extends ilObjectPlugin {
 		$this->log->write('Channel created started' . $time, xscaLog::LEVEL_DEBUG);
 		$this->setSysAccount($this->xsca_user->getSystemAccount());
 		$this->organisation_domain = $this->xsca_user->getOrganisation();
+		$this->xsca_user->create();
 		if ($this->getStreamingOnly()) {
 			$configuration_id = xscaConfig::get('scast_streaming_configuration_id');
 		} else {
@@ -229,8 +230,8 @@ class ilObjScast extends ilObjectPlugin {
 				'name' => (string)$this->getTitle(),
 				'discipline_id' => (int)$this->getDisciplineId(),
 				'license' => (string)$this->getLicense(),
-				'author' =>
-					(string)$this->xsca_user->getIliasUserObject()->getFirstName() . ' ' . $this->xsca_user->getIliasUserObject()->getLastName(),
+				'author' => (string)$this->xsca_user->getIliasUserObject()->getFirstName() . ' ' . $this->xsca_user->getIliasUserObject()
+						->getLastName(),
 				'department' => (string)$this->getDepartment(),
 				'organization_domain' => (string)$this->organisation_domain,
 				'access' => (string)'external_authority',
@@ -248,6 +249,8 @@ class ilObjScast extends ilObjectPlugin {
 			$this->log->write('obj_channel ' . $obj_channel, xscaLog::LEVEL_PRODUCTION);
 			if ($obj_channel->ext_id != '') {
 				$this->setExtId($obj_channel->ext_id);
+			} else {
+				throw new Exception('Scast no Ext-ID given');
 			}
 		} else {
 			$this->doUpdate(true);
@@ -266,12 +269,13 @@ class ilObjScast extends ilObjectPlugin {
 		));
 		$time = microtime() - $time;
 		$this->log->write('Channel created' . $time, xscaLog::LEVEL_DEBUG);
+		exit;
 	}
 
 
 	public function doRead() {
-		if (! self::$loaded) {
-			if (! is_object($this->db)) {
+		if (!self::$loaded) {
+			if (!is_object($this->db)) {
 				global $ilDB;
 				$this->db = $ilDB;
 				$this->pl = ilScastPlugin::getInstance();
@@ -286,6 +290,11 @@ class ilObjScast extends ilObjectPlugin {
 				$this->setOrganisationDomain($rec['organization_domain']);
 				$this->setOnline($rec['is_online']);
 				$this->setShowUploadToken($rec['show_upload_token']);
+			}
+			if (!$this->getExtId()) {
+				ilUtil::sendFailure($this->pl->txt('msg_no_ext_id_given'));
+
+				return false;
 			}
 			// Channel
 			if ($this->use_cache) {
@@ -352,7 +361,7 @@ class ilObjScast extends ilObjectPlugin {
 			'allow_annotations' => $this->getAllowAnnotations() ? 'yes' : 'no'
 		));
 		xscaApi::users($this->xsca_user->getExtAccount())->channels($this->getExtId())->put($data);
-		if (! $switch_only) {
+		if (!$switch_only) {
 			$this->db->update('rep_robj_xsca_data', array(
 				'is_ivt' => array( 'integer', $this->getIvt() ),
 				'is_online' => array( 'integer', $this->getOnline() ),
@@ -370,7 +379,7 @@ class ilObjScast extends ilObjectPlugin {
 
 
 	public function doDelete() {
-		if (! $this->hasReferencedChannels()) {
+		if (!$this->hasReferencedChannels()) {
 			xscaApi::users($this->xsca_user->getExtAccount())->channels($this->getExtId())->delete();
 		}
 		$this->db->manipulate('DELETE FROM rep_robj_xsca_data WHERE ' . ' id = ' . $this->db->quote($this->getId(), 'integer'));
@@ -826,7 +835,7 @@ class ilObjScast extends ilObjectPlugin {
 	 * @param xscaUser $user
 	 */
 	public function removeProducer(xscaUser $user) {
-		if (! $user->getIsSystemaccount()) {
+		if (!$user->getIsSystemaccount()) {
 			$api = xscaApi::users($this->getSysAccount());
 			$api->channels($this->getExtId())->producers($user->getExtAccount())->delete();
 			$this->log->write('Producer removed: ' . $user->getExtAccount(), xscaLog::LEVEL_DEBUG);
@@ -892,7 +901,7 @@ class ilObjScast extends ilObjectPlugin {
 
 
 	protected function syncAdmins() {
-		if (! self::$admin_sync) {
+		if (!self::$admin_sync) {
 			$ilCourseParticipants = ilCourseParticipants::_getInstanceByObjId($this->getCourseId());
 			$producers_filtered = $this->getProducers(true);
 			foreach ($producers_filtered as $producer_ext_id) {
