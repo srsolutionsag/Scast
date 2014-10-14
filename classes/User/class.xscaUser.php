@@ -9,6 +9,10 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 class xscaUser {
 
 	/**
+	 * @var array
+	 */
+	protected static $existing_cache = array();
+	/**
 	 * @var string
 	 */
 	protected $ext_account;
@@ -204,6 +208,7 @@ class xscaUser {
 		if ($this->exists()) {
 			return false;
 		}
+
 		$api = xscaApi::users();
 		$data = new xscaApiData('user');
 		$data->setFields(array(
@@ -224,9 +229,12 @@ class xscaUser {
 	 * @return bool
 	 */
 	public function exists() {
-		$api = xscaApi::users($this->getExtAccount())->get();
+		if (!isset(self::$existing_cache[$this->getExtAccount()])) {
+			$api = xscaApi::users($this->getExtAccount())->get();
+			self::$existing_cache[$this->getExtAccount()] = ((string)$api->request_status != '400');
+		}
 
-		return ((string)$api->request_status != '400');
+		return self::$existing_cache[$this->getExtAccount()];
 	}
 
 

@@ -115,10 +115,10 @@ class xscaClip {
 	 * @var string
 	 */
 	protected $status;
-        /**
-     * @var string
-     */
-    protected $issued_on;
+	/**
+	 * @var string
+	 */
+	protected $issued_on;
 	/**
 	 * @var xscaApiCollection
 	 */
@@ -163,7 +163,7 @@ class xscaClip {
 	 */
 	public static function getInstance($channel_ext_id, $clip_ext_id) {
 		$id = (string)$clip_ext_id;
-		if (! isset(self::$cache[$id])) {
+		if (!isset(self::$cache[$id])) {
 			self::$cache[$id] = new self($channel_ext_id, $clip_ext_id);
 		}
 
@@ -197,7 +197,7 @@ class xscaClip {
 				}
 			}
 		}
-		if (! ilObjScastAccess::checkPermissionOnchannel($a_obj_scast->getRefId(), 'write')) {
+		if (!ilObjScastAccess::checkPermissionOnchannel($a_obj_scast->getRefId(), 'write')) {
 			$suffix .= 'state=\'published\'';
 		}
 		$channel_ext_id = $a_obj_scast->getExtId();
@@ -231,24 +231,23 @@ class xscaClip {
 		}
 		$this->setExtId((string)$xml->ext_id);
 		$this->setSwitchInternalId((string)$xml->id);
-		$this->setOwner($xml->ivt__owner);
+		$this->setOwner((string)$xml->ivt__owner);
 		$cut = xscaConfig::get('switchcast_host') . '/clips/' . (string)$xml->id . '/cutting_tool_data/edit';
 		$this->setLinkCuttingTool($cut);
 		$this->setTitle((string)$xml->title);
 		$this->setLocation((string)$xml->location);
 		$this->setPresenter((string)$xml->presenter);
 		$this->setRecordingStation($xml->ivt__recordingstation);
-        $this->setLinkMov(self::getUrlFor($xml, 'Desktop'));
-        $this->setLinkM4v(self::getUrlFor($xml, 'Mobile'));
-        $this->setCover(self::getUrlFor($xml, 'Cover image'));
-        $this->setAnnotationlink(self::getUrlFor($xml, 'Annotate clip'));
-        $this->setLinkFlash(self::getUrlFor($xml, 'Streaming'));
-        $this->setDownloadLink(self::getUrlFor($xml, 'Download'));
+		$this->setLinkMov(self::getUrlFor($xml, 'Desktop'));
+		$this->setLinkM4v(self::getUrlFor($xml, 'Mobile'));
+		$this->setCover(self::getUrlFor($xml, 'Cover image'));
+		$this->setAnnotationlink(self::getUrlFor($xml, 'Annotate clip'));
+		$this->setLinkFlash(self::getUrlFor($xml, 'Streaming'));
+		$this->setDownloadLink(self::getUrlFor($xml, 'Download'));
 		$this->setStatus((string)$xml->state);
-        $this->setIssuedOn((string)$xml->issued_on);
+		$this->setIssuedOn((string)$xml->issued_on);
 		// Members holen und setzen
-		$set = $this->db->query('SELECT * FROM rep_robj_xsca_cmember ' . ' WHERE clip_ext_id = '
-			. $this->db->quote($this->getExtId(), 'text'));
+		$set = $this->db->query('SELECT * FROM rep_robj_xsca_cmember ' . ' WHERE clip_ext_id = ' . $this->db->quote($this->getExtId(), 'text'));
 		while ($rec = $this->db->fetchObject($set)) {
 			$this->members[] = $rec->user_id;
 		}
@@ -279,8 +278,7 @@ class xscaClip {
 
 	public function delete() {
 		$this->clip_api->delete();
-		$this->db->manipulate('DELETE FROM rep_robj_xsca_cmember WHERE ' . 'clip_ext_id = '
-			. $this->db->quote($this->getExtId(), 'text'));
+		$this->db->manipulate('DELETE FROM rep_robj_xsca_cmember WHERE ' . 'clip_ext_id = ' . $this->db->quote($this->getExtId(), 'text'));
 
 		return true;
 	}
@@ -292,8 +290,8 @@ class xscaClip {
 	 * @return bool
 	 */
 	public function addMember($user_id) {
-		$this->db->manipulate('INSERT INTO rep_robj_xsca_cmember ' . '(user_id, clip_ext_id) VALUES ('
-			. $this->db->quote($user_id, 'integer') . ',' . $this->db->quote($this->getExtId(), 'text') . ')');
+		$this->db->manipulate('INSERT INTO rep_robj_xsca_cmember ' . '(user_id, clip_ext_id) VALUES (' . $this->db->quote($user_id, 'integer') . ','
+			. $this->db->quote($this->getExtId(), 'text') . ')');
 
 		return true;
 	}
@@ -305,9 +303,8 @@ class xscaClip {
 	 * @return bool
 	 */
 	public function deleteMember($user_id) {
-		$this->db->manipulate('DELETE FROM rep_robj_xsca_cmember WHERE ' . 'user_id = '
-			. $this->db->quote($user_id, 'integer') . ' ' . 'AND clip_ext_id = '
-			. $this->db->quote($this->getExtId(), 'text'));
+		$this->db->manipulate('DELETE FROM rep_robj_xsca_cmember WHERE ' . 'user_id = ' . $this->db->quote($user_id, 'integer') . ' '
+			. 'AND clip_ext_id = ' . $this->db->quote($this->getExtId(), 'text'));
 
 		return true;
 	}
@@ -404,7 +401,7 @@ class xscaClip {
 	 */
 	public function getAnnotationlink() {
 		$idP = $_SERVER['Shib-Identity-Provider'];
-		if (! $idP) {
+		if (!$idP) {
 			return $this->annotation_link;
 		}
 		$url = $this->getAnnotationBaseURL();
@@ -728,21 +725,23 @@ class xscaClip {
 		return $this->status;
 	}
 
-    /**
-     * @param string $issued_on
-     */
-    public function setIssuedOn($issued_on) {
-        $this->issued_on = $issued_on;
-    }
+
+	/**
+	 * @param string $issued_on
+	 */
+	public function setIssuedOn($issued_on) {
+		$this->issued_on = $issued_on;
+	}
 
 
-    /**
-     * @return string
-     */
-    public function getIssuedOn() {
-        return $this->issued_on;
-    }
-    
+	/**
+	 * @return string
+	 */
+	public function getIssuedOn() {
+		return $this->issued_on;
+	}
+
+
 	/**
 	 * @return int
 	 */

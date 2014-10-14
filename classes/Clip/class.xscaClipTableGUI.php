@@ -208,15 +208,15 @@ class xscaClipTableGUI extends ilTable2GUI {
 		if ($this->objScast->getIvt()) {
 			if ($sel_cols['owner']) {
 				if ($clip->getOwner()) {
-					$user_login = ilObjUser::_checkExternalAuthAccount('shibboleth', $clip->getOwner());
-					$user_id = ilObjUser::_loginExists($user_login);
-					$obj_user = new ilObjUser($user_id);
-					if ($obj_user->getLastname() != '') {
-						$this->tpl->setVariable('OWNER',
-							$obj_user->getLastname() . ', ' . $obj_user->getFirstname() . ' (' . $obj_user->getEmail()
-							. ')');
-					} else {
-						$this->tpl->setVariable('OWNER', $this->pl->txt('owner_unknown'));
+					if ($usr_id = xscaUser::getUsrIdForExtAccount($clip->getOwner())) {
+						$obj_user = new ilObjUser($usr_id);
+
+						if ($obj_user->getLastname() != '') {
+							$this->tpl->setVariable('OWNER',
+								$obj_user->getLastname() . ', ' . $obj_user->getFirstname() . ' (' . $obj_user->getEmail() . ')');
+						} else {
+							$this->tpl->setVariable('OWNER', $this->pl->txt('owner_unknown'));
+						}
 					}
 				} else {
 					$this->tpl->setVariable('OWNER', $this->pl->txt('no_owner'));
@@ -231,8 +231,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 				$alist->setId($a_set->id);
 				$alist->setListTitle($this->pl->txt('actions'));
 				$this->ctrl->setParameterByClass('ilObjScastGUI', 'clip_ext_id', $clip->getExtId());
-				if ($this->objScast->getIvt() AND ($this->objScast->getInvitingPossible() AND ($clip->getOwner()
-							== $this->user->getExternalAccount()
+				if ($this->objScast->getIvt() AND ($this->objScast->getInvitingPossible() AND ($clip->getOwner() == $this->user->getExternalAccount()
 							OR $this->access->checkAccess('write', '', $this->objScast->getRefId())))
 				) {
 					$alist->addItem($this->pl->txt('edit_members'), 'editmembers', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'editClipMembers'));
@@ -266,7 +265,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 		if (count($data) > 0) {
 			foreach ($data as $clip) {
 				$clipGUI = new xscaClipGUI($this->objScastGui, $this->objScast, $clip->ext_id);
-				if ($clipGUI->checkPermissionBool('read') OR ! $this->objScast->getIvt()) {
+				if ($clipGUI->checkPermissionBool('read') OR !$this->objScast->getIvt()) {
 					$newData[] = $clip;
 				}
 			}
@@ -314,8 +313,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 				if (ilObjUser::    _lookupExternalAccount($user_id)) {
 					$ilObjUser = new ilObjUser($user_id);
 					$arr_participants[$ilObjUser->getExternalAccount()] =
-						$ilObjUser->getLastname() . ' ' . $ilObjUser->getFirstname() . ' ('
-						. $ilObjUser->getEmail() . ')';
+						$ilObjUser->getLastname() . ' ' . $ilObjUser->getFirstname() . ' (' . $ilObjUser->getEmail() . ')';
 				}
 			}
 			@natcasesort($arr_participants);
