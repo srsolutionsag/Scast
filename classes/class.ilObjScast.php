@@ -876,6 +876,9 @@ class ilObjScast extends ilObjectPlugin {
 	 * @return SimpleXMLElement
 	 */
 	public function addProducerByExtId($aai_unique_id, $use_sys_account = true) {
+		if (in_array($aai_unique_id, $this->getProducers()) OR $aai_unique_id == $this->getSysAccount()) {
+			return false;
+		}
 		if ($use_sys_account) {
 			$ext_account = $this->getSysAccount();
 		} else {
