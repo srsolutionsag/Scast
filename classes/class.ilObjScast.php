@@ -159,6 +159,28 @@ class ilObjScast extends ilObjectPlugin {
 
 
 	/**
+	 * @param $ext_id
+	 *
+	 * @return array
+	 */
+	public static function getAllRefIdsForExtId($ext_id) {
+		global $ilDB;
+
+		/**
+		 * @var $ilDB ilDB
+		 */
+		$ref_ids = array();
+
+		$set = $ilDB->query('SELECT * FROM rep_robj_xsca_data ' . ' WHERE ext_id = ' . $ilDB->quote($ext_id, 'text'));
+		while ($rec = $ilDB->fetchObject($set)) {
+			$ref_ids = array_merge($ref_ids, ilObject2::_getAllReferences($rec->id));
+		}
+
+		return $ref_ids;
+	}
+
+
+	/**
 	 * Get type.
 	 */
 	final function initType() {
@@ -212,6 +234,7 @@ class ilObjScast extends ilObjectPlugin {
 		$this->setSysAccount($this->xsca_user->getSystemAccount());
 		$this->organisation_domain = $this->xsca_user->getOrganisation();
 		$this->xsca_user->create();
+
 		if ($this->getStreamingOnly()) {
 			$configuration_id = xscaConfig::get('scast_streaming_configuration_id');
 		} else {
@@ -225,6 +248,7 @@ class ilObjScast extends ilObjectPlugin {
 			return;
 		}
 		if ($this->getExtId() == '') {
+
 			$data = new xscaApiData('channel');
 			$data->setFields(array(
 				'name' => (string)$this->getTitle(),
@@ -246,10 +270,13 @@ class ilObjScast extends ilObjectPlugin {
 				'kind' => (string)$this->getChannelKind()
 			));
 			$obj_channel = xscaApi::users($this->xsca_user->getExtAccount())->channels()->post($data);
+
 			$this->log->write('obj_channel ' . $obj_channel, xscaLog::LEVEL_PRODUCTION);
 			if ($obj_channel->ext_id != '') {
+
 				$this->setExtId($obj_channel->ext_id);
 			} else {
+
 				throw new Exception('Scast no Ext-ID given');
 			}
 		} else {
@@ -269,7 +296,6 @@ class ilObjScast extends ilObjectPlugin {
 		));
 		$time = microtime() - $time;
 		$this->log->write('Channel created' . $time, xscaLog::LEVEL_DEBUG);
-		exit;
 	}
 
 

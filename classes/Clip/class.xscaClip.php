@@ -327,7 +327,7 @@ class xscaClip {
 	 * @return array
 	 */
 	public function getMembers() {
-		return $this->members;
+		return (array)$this->members;
 	}
 
 

@@ -31,8 +31,7 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 		switch ($a_permission) {
 			case 'visible':
 			case 'read':
-				if (ilObjScastAccess::checkOnline($a_obj_id)
-					AND ! $ilAccess->checkAccessOfUser($a_user_id, 'write', '', $a_ref_id)
+				if (ilObjScastAccess::checkOnline($a_obj_id) AND !$ilAccess->checkAccessOfUser($a_user_id, 'write', '', $a_ref_id)
 				) {
 					return true;
 				}
@@ -78,24 +77,50 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 		global $ilAccess, $ilUser;
 		$ref_id = $ref_id ? $ref_id : $_GET['ref_id'];
 		$ilObjScast = new ilObjScast($ref_id, true);
+
 		if ($a_perm == 'write') {
 			if ($ilAccess->checkAccess('write', '', $ref_id) OR $ilUser->getExternalAccount() == $clip->getOwner()
 			) {
 				return true;
 			}
 		} elseif ($a_perm == 'read') {
-			$arr_clip_members = (array)$clip->getMembers();
-			if (($ilAccess->checkAccess('write', '', $ref_id)) OR ($ilUser->getExternalAccount() == $clip->getOwner()
-					AND $ilUser->getExternalAccount() != '' AND $clip->getOwner() != '')
-				OR is_numeric(array_search($ilUser->getId(), $arr_clip_members))
-				OR xscaGroup::checkSameGroup($ilObjScast->getId(), $clip->getOwnerILIASId(), $ilUser->getId())
-				OR ($ilObjScast->getIvt() == false AND $ilAccess->checkAccess('read', '', $ref_id))
+			$arr_clip_members = $clip->getMembers();
+
+			$write_permission = self::checkAccessOnClipForAllReferences($clip, 'write');
+			$read_permission = self::checkAccessOnClipForAllReferences($clip, 'read');
+			$owner = $ilUser->getExternalAccount() == $clip->getOwner() AND $ilUser->getExternalAccount() != '' AND $clip->getOwner() != '';
+			$clip_member = array_search($ilUser->getId(), $arr_clip_members);
+			if (($write_permission) OR ($owner) OR $clip_member
+				OR xscaGroup::checkSameGroup($ilObjScast->getId(), $clip->getOwnerILIASId(), $ilUser->getId()) OR ($ilObjScast->getIvt() == false
+					AND $read_permission)
 			) {
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * @param xscaClip $clip
+	 * @param string   $permission
+	 *
+	 * @return bool
+	 */
+	public static function checkAccessOnClipForAllReferences(xscaClip $clip, $permission = 'read') {
+		global $ilAccess;
+		/**
+		 * @var $ilAccess ilAccessHandler
+		 */
+		$access = false;
+		foreach (ilObjScast::getAllRefIdsForExtId($clip->getChannelExtId()) as $ref_id) {
+			if ($ilAccess->checkAccess($permission, '', $ref_id)) {
+				$access = true;
+			}
+		}
+
+		return $access;
 	}
 
 
@@ -109,8 +134,7 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 		$ref_id = $ref_id ? $ref_id : $_GET['ref_id'];
 		$ilObjScast = new ilObjScast($ref_id, true);
 
-		return $ilAccess->checkAccess('write', '', $ilObjScast->getRefId()) AND xscaUser::getInstance()
-			->isAllowedToUseSwitchCast();
+		return $ilAccess->checkAccess('write', '', $ilObjScast->getRefId()) AND xscaUser::getInstance()->isAllowedToUseSwitchCast();
 	}
 
 
@@ -128,8 +152,7 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 		if ($as_reference) {
 			$a_id = ilObject2::_lookupObjId($a_id);
 		}
-		$set = $ilDB->query('SELECT is_online FROM rep_robj_xsca_data ' . ' WHERE id = '
-			. $ilDB->quote($a_id, 'integer'));
+		$set = $ilDB->query('SELECT is_online FROM rep_robj_xsca_data ' . ' WHERE id = ' . $ilDB->quote($a_id, 'integer'));
 		$rec = $ilDB->fetchObject($set);
 
 		return (boolean)$rec->is_online;

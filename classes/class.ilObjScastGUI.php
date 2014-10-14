@@ -64,7 +64,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 */
 	public function __construct($a_ref_id = 0, $a_id_type = self::REPOSITORY_NODE_ID, $a_parent_node_id = 0) {
 		parent::__construct($a_ref_id, $a_id_type, $a_parent_node_id);
-		global $tpl, $ilCtrl, $ilAccess, $ilNavigationHistory, $ilTabs, $ilUser;
+		global $tpl, $ilCtrl, $ilAccess, $ilNavigationHistory, $ilTabs;
 		/**
 		 * @var $tpl                 ilTemplate
 		 * @var $ilCtrl              ilCtrl
@@ -259,6 +259,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 
 	public function save() {
 		global $rbacsystem;
+
 		if (!$rbacsystem->checkAccess('create', $_GET[self::REF_ID], self::getType())) {
 			$this->ilias->raiseError($this->lng->txt('no_create_permission'), $this->ilias->error_obj->MESSAGE);
 		}
@@ -289,11 +290,14 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				$newObj->setExtId($this->form->getInput(self::F_CHANNEL_ID));
 			}
 			try {
-
 				$newObj->create();
 			} catch (Exception $e) {
-				return false;
+				if($e->getMessage()) {
+					return false;
+				}
 			}
+
+
 			$newObj->createReference();
 			$newObj->putInTree($_GET[self::REF_ID]);
 			$newObj->setPermissions($_GET[self::REF_ID]);
@@ -620,7 +624,11 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$target = xscaTarget::get($a_target);
 		$ref_id = $target->getRefId();
 		if ($target->getIsSwitchRedirect()) {
-			if (ilObjScastAccess::checkAccessOnClip(xscaClip::getInstance($target->getChannelId(), $target->getClipId()), 'read', $ref_id)) {
+
+			$clip = xscaClip::getInstance($target->getChannelId(), $target->getClipId());
+			ilObjScastAccess::checkAccessOnClipForAllReferences($clip);
+
+			if (ilObjScastAccess::checkAccessOnClip($clip, 'read', $ref_id)) {
 				xscaToken::extAuthRedirectToVodUrl($target);
 			} else {
 				ilUtil::sendFailure(sprintf($lng->txt('msg_no_perm_read_item'), ilObject::_lookupTitle(ilObject::_lookupObjId($ref_id))), true);
