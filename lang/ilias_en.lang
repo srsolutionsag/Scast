@@ -7,14 +7,20 @@ add_member#:#Add Member
 add_Member#:#Add Member
 add_member#:#Add Member
 admin_config_allow_test_channels#:#Allow Testchannels
+admin_config_form_button_save#:#Save
+admin_config_form_button_cancel#:#Cancel
+admin_config_form_title#:#Settings
+admin_config_form_description#:#SwitchCast-API Settings
+admin_config_disable_cache#:#Disable Cache
+admin_config_disable_cache_info#:#Requests to the API won't be cached anymore
 admin_config_allow_test_channels_info#:#Allow Testchannels
 admin_config_cacrt_file_info#:#Certificate authority
 admin_config_castkey_file_info#:#SWITCH-Cast certificate, please contact Switch for further information
 admin_config_castkey_password_info#:#optinal
 admin_config_castkeypassword#:#Certificate-Password
 admin_config_castkeypassword_info#:#SwitchCast Certificate-Password (optional)
-admin_config_create_default_sysaccount#:#
-admin_config_create_default_sysaccount_info#:#
+admin_config_create_by_sys#:#Use default Sys-Account to create Channels
+admin_config_create_by_sys_info#:#Use default Sys-Account to create Channels
 admin_config_crt_file_info#:#SWITCH-Cast certificate, please contact Switch for further information
 admin_config_deactivate_get_existing#:#Deactivate Selection of existing Channels
 admin_config_deactivate_get_existing_info#:#Deactivate Selection of existing Channels
@@ -44,7 +50,8 @@ admin_config_scast_configuration_id#:#Standard-Configuration-ID
 admin_config_scast_metadata_export#:#Metadata Export
 admin_config_scast_scast_access#:#Authentication-Methode (external_authority)
 admin_config_scast_streaming_configuration_id#:#Streaming-Configuration-ID
-admin_config_scast_use_eula#:#Show EULA
+admin_config_use_eula#:#Show EULA
+admin_config_use_eula_info#:#Show EULA
 admin_config_show_api_debug#:#Show Debug
 admin_config_show_api_debug_info#:#Shows all Switch-Cast
 admin_config_sysaccount_eth_ch#:#ETH
@@ -99,9 +106,10 @@ clip_status_preparing#:#Clip is beeing prepared, not yet visible for students
 clip_status_processing#:#Clip is beeing processed, not yet visible for students
 clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips#:#Clips
-configure#:#Configure SwitchCast
-content#:#Content
-context#:#Context
+tab_configure#:#Configure SwitchCast
+tab_content#:#Content
+tab_user#:#Delete User
+tab_context#:#Context
 create_a_group#:#Please create a group first.
 crs_create_xsca#:#SWITCHCast Channel anlegen
 cut_switch#:#Cut Clip
@@ -112,9 +120,9 @@ department#:#Department
 department_desc#:#How is the name of your department?
 description#:#Description
 discipline_0#:#Disciplin
-discipline_0_desc#:# 
-discipline_0_desc#:# 
-discipline_0_desc#:# 
+discipline_0_desc#:#
+discipline_0_desc#:#
+discipline_0_desc#:#
 discipline_1#:#Disciplin
 discipline_2#:#Disciplin
 dont_allow_annotations#:#No annotations
@@ -139,7 +147,6 @@ group#:#Group
 groups#:#Groups
 grp_create_xsca#:#SWITCHCast Channel anlegen
 has_references#:#Attention: The channel as some more references in ILIAS
-has_references#:#
 import_xml#:#Import Settings
 introduction_text#:#Work Instructions
 ipod#:#Mobile
@@ -178,10 +185,8 @@ remove#:#Remove
 rep_robj_xsca_obj_xsca#:#SWITCHcast Channel
 rep_robjs_xsca_obj_xsca#:#SWITCHcast Channels
 save#:#Save
-scast_plugin_configuration#:#Settings
 select_a_group#:#Please choose a group!
 select_existing_channel#:#Choose an existing Channel
-settings_description#:#SwitchCast-API Settings
 status#:#State
 streaming_only#:#Streaming only
 success_edit#:#Saved
@@ -195,24 +200,3 @@ xsca_new#:#Create new SWITCHcast Channel
 xsca_read#:#Channel is readable
 xsca_visible#:#Channel is visible
 xsca_write#:#Edit Channel-Settings
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#
-#:#

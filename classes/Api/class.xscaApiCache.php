@@ -165,6 +165,9 @@ class xscaApiCache extends AR {
 	 * @return bool|stdClass|SimpleXMLElement
 	 */
 	public static function get($key, $type = NULL, $as_object = false) {
+		if (xscaConfig::get(xscaConfig::F_DISABLE_CACHE)) {
+			return false;
+		}
 		$key = self::key($key);
 		$return = false;
 		$where['cache_key'] = $key;

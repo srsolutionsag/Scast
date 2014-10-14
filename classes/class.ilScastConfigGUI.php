@@ -30,7 +30,7 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 		$this->tabs = $ilTabs;
 		$this->toolbar = $ilToolbar;
 		$this->pl = ilScastPlugin::getInstance();
-//		$this->pl->updateLanguages();
+		$this->pl->updateLanguageFiles();
 	}
 
 
@@ -38,14 +38,19 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 	 * @param $cmd
 	 */
 	function performCommand($cmd) {
-		$this->tabs->addTab('configure', $this->pl->txt('configure'), $this->ctrl->getLinkTarget($this, 'configure'));
-		$this->tabs->setTabActive('configure');
+		$this->tabs->addTab('configure', $this->pl->txt('tab_configure'), $this->ctrl->getLinkTarget($this, 'configure'));
+		$this->tabs->addTab('user', $this->pl->txt('tab_user'), $this->ctrl->getLinkTarget($this, 'user'));
 		switch ($cmd) {
 			case 'configure':
 			case 'save':
 			case 'export':
 			case 'import':
 			case 'importScreen':
+				$this->tabs->setTabActive('configure');
+				$this->$cmd();
+				break;
+			case 'user':
+				$this->tabs->setTabActive('user');
 				$this->$cmd();
 				break;
 		}
@@ -56,7 +61,7 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 		$xObj = simplexml_load_string('<?xml version=\'1.0\' encoding=\'utf-8\'?><scastconfig/>');
 		$form = new xscaConfigFormGUI($this);
 		if ($form->checkInput()) {
-			foreach ($form->getItems() as $key => $item) {
+			foreach ($form->getExportItems() as $key => $item) {
 				$xObj->addChild($item->getPostvar(), $item->getValue());
 				foreach ($item->getSubItems() as $sub_item) {
 					$xObj->addChild($item->getPostvar(), $item->getValue());
@@ -105,7 +110,6 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 
 
 	public function configure() {
-//		 $this->pl->updateLanguageFiles();
 		$this->toolbar->addButton($this->pl->txt('export_xml'), $this->ctrl->getLinkTarget($this, 'export'));
 		$this->toolbar->addButton($this->pl->txt('import_xml'), $this->ctrl->getLinkTarget($this, 'importScreen'));
 		$new_form = new xscaConfigFormGUI($this);
@@ -121,6 +125,11 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 			$this->ctrl->redirect($this, 'configure');
 		}
 		$this->tpl->setContent($form->getHTML());
+	}
+
+
+	protected function user(){
+		
 	}
 }
 
