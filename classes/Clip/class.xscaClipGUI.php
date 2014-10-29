@@ -47,7 +47,7 @@ class xscaClipGUI {
 		$this->pl = ilScastPlugin::getInstance();
 		$this->objScast = $a_obj_scast;
 		$this->parent_gui = $a_obj_scast_gui;
-		if (! $a_clip_ext_id) {
+		if (!$a_clip_ext_id) {
 			$a_clip_ext_id = $_GET['clip_ext_id'];
 		}
 		if ($a_clip_ext_id) {
@@ -91,11 +91,14 @@ class xscaClipGUI {
 	public function update() {
 		$form = new xscaClipFormGUI($this, $this->clip);
 		$form->setValuesByPost();
+
 		if ($form->saveObject()) {
 			ilUtil::sendSuccess($this->pl->txt('success_edit'), true);
 			$this->ctrl->redirect($this->parent_gui, $_GET['fallbackCmd']);
 		} else {
+			$this->tpl->getStandardTemplate();
 			$this->tpl->setContent($form->getHTML());
+			$this->tpl->show();
 		}
 	}
 
@@ -125,24 +128,6 @@ class xscaClipGUI {
 	}
 
 
-	/**
-	 * @param $user_id
-	 *
-	 * @return string
-	 */
-	protected static function lookUpShibbolethId($user_id) {
-		global $ilDB;
-		/**
-		 * @var $ilDB ilDB
-		 */
-		$q = 'SELECT ext_account FROM usr_data WHERE auth_mode = ' . $ilDB->quote('shibboleth', 'text')
-			. ' AND usr_id = ' . $ilDB->quote($user_id, 'integer');
-
-		$shibboleth_id = $ilDB->fetchObject($ilDB->query($q));
-
-		return $shibboleth_id->ext_account;
-	}
-
 
 	/**
 	 * @param string $a_mode
@@ -157,7 +142,7 @@ class xscaClipGUI {
 		$arr_participants = array();
 		$arr_participants[''] = '--' . $this->pl->txt('not_assigned') . '--';
 		foreach ($ilParticipants->getParticipants() as $user_id) {
-			$ext_account = self::lookUpShibbolethId($user_id);
+			$ext_account = xscaUser::getExtAccountForUserId($user_id);
 			if ($ext_account) {
 				$ilObjUser = new ilObjUser($user_id);
 				$arr_participants[$ilObjUser->getExternalAccount()] =
@@ -286,8 +271,8 @@ class xscaClipGUI {
 			// Nur Benutzer, welche nicht dem Owner entsprechen und noch nicht Clip-Member und nicht Producer sind anzeigen
 			// Hier werden auch lokale Accounts zugelassen!
 			if (((string)$this->clip->getOwner() != ilObjUser::_lookupExternalAccount($user_id) OR ilObjUser::_lookupExternalAccount($user_id) == '')
-				AND ! $this->clip->isMember($user_id) AND ! $this->objScast->isProducer(ilObjUser::_lookupExternalAccount($user_id))
-				AND ! xscaGroup::checkSameGroup($this->objScast->getId(), $owner_id, $user_id)
+				AND !$this->clip->isMember($user_id) AND !$this->objScast->isProducer(ilObjUser::_lookupExternalAccount($user_id))
+				AND !xscaGroup::checkSameGroup($this->objScast->getId(), $owner_id, $user_id)
 			) {
 				$ilObjUser = new ilObjUser($user_id);
 				$arr_participants[$user_id] = $ilObjUser->getLastname() . ' ' . $ilObjUser->getFirstname() . ' (' . $ilObjUser->getEmail() . ')';

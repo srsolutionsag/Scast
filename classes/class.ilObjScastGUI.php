@@ -80,6 +80,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$this->xsca_user = xscaUser::getInstance();
 		$this->tabs_gui = $ilTabs;
 		$this->pl = ilScastPlugin::getInstance();
+//		$this->pl->updateLanguageFiles();
 		if (exec('hostname') == 'ilias-webt1' OR $_GET['devmode'] OR xscaConfig::get('show_api_debug')) {
 			$this->dev = true;
 		}

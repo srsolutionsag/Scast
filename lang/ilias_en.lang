@@ -104,6 +104,7 @@ clip_status_created#:#Clip not yet published, not visible for students
 clip_status_importing#:#Clip's beeing imported
 clip_status_preparing#:#Clip is beeing prepared, not yet visible for students
 clip_status_processing#:#Clip is beeing processed, not yet visible for students
+clip_status_error#:#An error occured with SwitchCast
 clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips#:#Clips
 tab_configure#:#Configure SwitchCast

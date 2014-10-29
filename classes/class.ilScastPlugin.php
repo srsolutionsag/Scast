@@ -74,6 +74,7 @@ class ilScastPlugin extends ilRepositoryObjectPlugin {
 
 
 	public function updateLanguageFiles() {
+		setlocale(LC_ALL, 'de_DE.utf8');
 		ini_set('auto_detect_line_endings', true);
 		$path = substr(__FILE__, 0, strpos(__FILE__, 'classes')) . 'lang/';
 		if (file_exists($path . 'lang_custom.csv')) {

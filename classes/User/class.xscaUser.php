@@ -120,6 +120,25 @@ class xscaUser {
 
 
 	/**
+	 * @param $user_id
+	 *
+	 * @return string
+	 */
+	public static function getExtAccountForUserId($user_id) {
+		global $ilDB;
+		/**
+		 * @var $ilDB ilDB
+		 */
+		$q = 'SELECT ext_account FROM usr_data WHERE auth_mode = ' . $ilDB->quote('shibboleth', 'text') . ' AND usr_id = '
+			. $ilDB->quote($user_id, 'integer');
+
+		$shibboleth_id = $ilDB->fetchObject($ilDB->query($q));
+
+		return $shibboleth_id->ext_account;
+	}
+
+
+	/**
 	 * @return bool
 	 */
 	public function isAllowedToUseSwitchCast() {
