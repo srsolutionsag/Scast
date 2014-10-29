@@ -273,10 +273,8 @@ class ilObjScast extends ilObjectPlugin {
 
 			$this->log->write('obj_channel ' . $obj_channel, xscaLog::LEVEL_PRODUCTION);
 			if ($obj_channel->ext_id != '') {
-
 				$this->setExtId($obj_channel->ext_id);
 			} else {
-
 				throw new Exception('Scast no Ext-ID given');
 			}
 		} else {
@@ -408,7 +406,7 @@ class ilObjScast extends ilObjectPlugin {
 		if (!$this->hasReferencedChannels()) {
 			xscaApi::users($this->xsca_user->getExtAccount())->channels($this->getExtId())->delete();
 		}
-		$this->db->manipulate('DELETE FROM rep_robj_xsca_data WHERE ' . ' id = ' . $this->db->quote($this->getId(), 'integer'));
+		$this->db->manipulate('DELETE FROM rep_robj_xsca_data WHERE id = ' . $this->db->quote($this->getId(), 'integer'));
 	}
 
 
@@ -876,9 +874,10 @@ class ilObjScast extends ilObjectPlugin {
 	 * @return SimpleXMLElement
 	 */
 	public function addProducerByExtId($aai_unique_id, $use_sys_account = true) {
-		if (in_array($aai_unique_id, $this->getProducers()) OR $aai_unique_id == $this->getSysAccount()) {
-			return false;
+		if (in_array($aai_unique_id, $this->getProducers())) {
+//			return false;
 		}
+
 		if ($use_sys_account) {
 			$ext_account = $this->getSysAccount();
 		} else {
