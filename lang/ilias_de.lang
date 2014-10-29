@@ -104,6 +104,7 @@ clip_status_created#:#Clip noch nicht publiziert, nicht sichtbar für Studierend
 clip_status_importing#:#Clip wird importiert
 clip_status_preparing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
 clip_status_processing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
+clip_status_error#:#Es ist ein Fehler bei SwitchCast aufgetreten
 clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips#:#Clips
 tab_configure#:#SwitchCast konfigurieren
@@ -156,7 +157,7 @@ lifetime_of_content_in_months#:#Intended lifetime of content
 lifetime_of_content_in_months_desc#:#How long shoud the video material be published?
 location#:#Ort
 member#:#Mitglied
-msg_obj_modified#:#nderungen gespeichert
+msg_obj_modified#:#Änderungen gespeichert
 msg_reload_clips#:#Die Clips werden neu geladen. Dies kann einen Moment dauern.
 new_channel#:#New Channel
 no_channels_available#:#Es sind keine vorhandenen Channels verfügbar.

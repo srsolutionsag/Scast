@@ -100,10 +100,11 @@ clip_deleted;;Der Clip wurde gelöscht.;The clip has been deleted.
 clip_inviting_possible;;Clip-Besitzer können Leserechte auf Ihre Clips erteilen;Clip Owner are able to invite other users
 clip_onpublishing;;Bitte haben Sie etwas Geduld. Der Clip wird publiziert.;Bitte haben Sie etwas Geduld. Der Clip wird publiziert.
 clip_onupload;;Bitte haben Sie etwas Geduld. Der Clip wird derzeit für die spätere Bearbeitung vorbereitet.;Bitte haben Sie etwas Geduld. Der Clip wird derzeit für die spätere Bearbeitung vorbereitet.
-clip_status_created;;Clip noch nicht publiziert, nicht sichtbar für Studierende;Clip not yet published, not visible for students
-clip_status_importing;;Clip wird importiert;Clip's beeing imported
-clip_status_preparing;;Clip wird aufbereitet, für Studierende noch nicht sichtbar;Clip is beeing prepared, not yet visible for students
-clip_status_processing;;Clip wird aufbereitet, für Studierende noch nicht sichtbar;Clip is beeing processed, not yet visible for students
+clip_status;created;Clip noch nicht publiziert, nicht sichtbar für Studierende;Clip not yet published, not visible for students
+clip_status;importing;Clip wird importiert;Clip's beeing imported
+clip_status;preparing;Clip wird aufbereitet, für Studierende noch nicht sichtbar;Clip is beeing prepared, not yet visible for students
+clip_status;processing;Clip wird aufbereitet, für Studierende noch nicht sichtbar;Clip is beeing processed, not yet visible for students
+clip_status;error;Es ist ein Fehler bei SwitchCast aufgetreten;An error occured with SwitchCast
 clip_unpublished;;Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.;Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips;;Clips;Clips
 tab;configure;SwitchCast konfigurieren;Configure SwitchCast
