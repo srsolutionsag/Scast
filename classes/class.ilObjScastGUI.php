@@ -285,6 +285,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$newObj->setAllowAnnotations($this->form->getInput('allow_annotations'));
 			$newObj->setIntroductionText($this->form->getInput('introduction_text'));
 			$newObj->setChannelKind($this->form->getInput('channel_kind'));
+
 			// Falls bestehender Channel
 			if ($this->form->getInput('channel_type') == '2') {
 				$newObj->setExtId($this->form->getInput(self::F_CHANNEL_ID));
@@ -296,7 +297,6 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 					return false;
 				}
 			}
-
 
 			$newObj->createReference();
 			$newObj->putInTree($_GET[self::REF_ID]);
