@@ -224,9 +224,9 @@ class xscaUser {
 	 * @return bool
 	 */
 	public function create() {
-		if ($this->exists()) {
-			return false;
-		}
+//		if ($this->exists()) {
+//			return false;
+//		}
 
 		$api = xscaApi::users();
 		$data = new xscaApiData('user');

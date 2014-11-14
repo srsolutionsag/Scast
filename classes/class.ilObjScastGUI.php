@@ -80,7 +80,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$this->xsca_user = xscaUser::getInstance();
 		$this->tabs_gui = $ilTabs;
 		$this->pl = ilScastPlugin::getInstance();
-//		$this->pl->updateLanguageFiles();
+		//		$this->pl->updateLanguageFiles();
 		if (exec('hostname') == 'ilias-webt1' OR $_GET['devmode'] OR xscaConfig::get('show_api_debug')) {
 			$this->dev = true;
 		}
@@ -246,12 +246,13 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	public function create() {
 		global $rbacsystem, $lng;
 		$this->object = new ilObjScast();
-		if (!$rbacsystem->checkAccess('create', $_GET[self::REF_ID], $this->object->getType()) OR !$this->xsca_user->hasSystemAccount()
+		if (!$rbacsystem->checkAccess('create', $_GET[self::REF_ID], ilObjScast::TYPE) OR !$this->xsca_user->hasSystemAccount()
 		) {
 			ilUtil::sendFailure($lng->txt('no_permission'));
 		} else {
-			$this->ctrl->setParameter($this, 'new_type', $this->object->getType());
-			$this->xsca_user->create();
+			$this->ctrl->setParameter($this, 'new_type', ilObjScast::TYPE);
+			xscaUser::getInstance()->create();
+
 			$this->initPropertiesForm('create');
 			$this->tpl->setContent($this->form->getHTML());
 		}
@@ -264,6 +265,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		if (!$rbacsystem->checkAccess('create', $_GET[self::REF_ID], self::getType())) {
 			$this->ilias->raiseError($this->lng->txt('no_create_permission'), $this->ilias->error_obj->MESSAGE);
 		}
+		xscaUser::getInstance()->create();
 		$this->ctrl->setParameter($this, 'new_type', self::getType());
 		$this->initPropertiesForm('create', self::getType());
 		if (xscaConfig::get(xscaConfig::F_USE_EULA)) {
@@ -294,7 +296,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			try {
 				$newObj->create();
 			} catch (Exception $e) {
-				if($e->getMessage()) {
+				if ($e->getMessage()) {
 					return false;
 				}
 			}

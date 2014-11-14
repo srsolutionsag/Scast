@@ -20,6 +20,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
  */
 class ilObjScast extends ilObjectPlugin {
 
+	const TYPE = 'xsca';
 	/**
 	 * @var bool
 	 */
@@ -184,7 +185,7 @@ class ilObjScast extends ilObjectPlugin {
 	 * Get type.
 	 */
 	final function initType() {
-		$this->setType('xsca');
+		$this->setType(self::TYPE);
 	}
 
 
