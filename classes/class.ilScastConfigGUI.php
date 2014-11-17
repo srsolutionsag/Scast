@@ -30,7 +30,6 @@ class ilScastConfigGUI extends ilPluginConfigGUI {
 		$this->tabs = $ilTabs;
 		$this->toolbar = $ilToolbar;
 		$this->pl = ilScastPlugin::getInstance();
-		$this->pl->updateLanguageFiles();
 	}
 
 
