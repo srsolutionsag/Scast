@@ -1,11 +1,152 @@
 <!-- language file start -->
-accept_eula#:#Ich akzeptiere die Nutzervereinbarungen
+channel_accept_eula#:#Ich akzeptiere die Nutzervereinbarungen
+channel_clip_based_rightmanagement#:#Rechte für einzelne Clips setzen
+channel_clip_based_rightmanagement_desc#:#Diese Einstellung aktiviert eine individuelle Rechteverwaltung auf Clip-Ebene (iVT-Modus). Lassen Sie Einstellung deaktiviert, wenn alle Kursteilnehmer sämtliche Aufzeichnungen des gewählten Kanals sehen dürfen.
+channel_has_references#:#Dieser SWITCHcast-Channel wird in ILIAS mehrfach verwendet. Änderungen, welche Sie hier vornehmen, werden auf alle Referenzen übertragen!
+channel_type#:#Channel
+channel_type_new#:#Neuer Channel
+channel_type_existing#:#Bestehender Channel
+channel_type_existing_select#:#Wählen Sie einen bestehenden Channel
+channel_kind#:#Channel-Typ
+channel_kind_productiv#:#Produktiv
+channel_kind_test#:#Test
+channel_title#:#Titel
+channel_description#:#Beschreibung
+channel_online#:#Online
+channel_introduction_text#:#Arbeitsanweisung
+channel_license#:#Lizenz
+channel_license_desc#:#For detailed information, visit <a target='_blank' href='http://creativecommons.org/international/ch/'>Creative Commons International (Switzerland)</a>
+#:#
+clip_add#:#Clip hinzufügen
+clip_reload#:#Clips neu laden
+clip_actions#:#Aktionen
+clip_edit#:#Metadaten editieren
+clip_edit_members#:#Mitglieder bearbeiten
+clip_edit_owner#:#Besitzer bearbeiten
+clip_cut_switch#:#Clip schneiden
+clip_delete#:#Clip löschen
+clip_title#:#Titel
+clip_presenter#:#Presenter
+clip_location#:#Ort
+clip_update#:#Speichern
+clip_create#:#Speichern
+clip_cancel#:#Abbrechen
+#:#
+edit_properties#:#Eigenschaften bearbeiten
 actions#:#Aktionen
-add#:#Hinzufügen
-add_clip#:#Clip hinzufügen
 add_member#:#Mitglied hinzufügen
 add_Member#:#Mitglied hinzufügen
 add_member#:#Mitglied hinzufügen
+agreement_title#:#Service Conditions
+allow_annotations#:#Annotationen erlauben
+annotations#:#Annotationen
+available_participants#:#Verfügbare Kursteilnehmer
+back_to_list#:#Zurück
+cancel#:#Abbrechen
+cast_back_to_list#:#Zurück zur Liste
+channel_author#:#Channel Autor
+channel_chaptering#:#Auto chaptering
+channel_chaptering_desc#:#Enable auto chaptering for each uploaded media. Auto chaptering based on OCR scanning of the slides.
+channel_discipline#:#Disziplin
+channel_extid#:#Channel-Ext-ID
+channel_extid_desc#:#Die externe Channel-ID müssten Sie beim Podcast-Support der Uni Bern nachfragen. Bitte senden Sie ein Mail an <a href="mailto:podcast@id.unibe.ch">podcast@id.unibe.ch</a>  mit der SWITCHcast Channel Nummer.
+channel_id#:#Channel ID
+channel_name#:#Channel Name
+channel_searchability#:#Searchability
+channel_searchability_desc#:#Channel content is publicly <a target="_blank" href="https://collection.switch.ch/">searchable in SWITCHcollection</a>. Clips will be licensed in SWITCHcollection under Creative Commons Attribution-Noncommercial-No Derivative Works 2.5 Switzerland.
+channel_streamingonly#:#Nur Streaming
+channel_streamingonly_desc#:#A stream can only be watched via an internet connection using the SWITCH video player software
+channel_type#:#Channel type
+clip_confirm_delete#:#Das Löschen bewirkt, dass der Clip auch auf SWITCHCast gelöscht wird. Wollen Sie diesen Clip wirklich löschen?
+clip_deleted#:#Der Clip wurde gelöscht.
+clip_inviting_possible#:#Clip-Besitzer können Leserechte auf Ihre Clips erteilen
+clip_onpublishing#:#Bitte haben Sie etwas Geduld. Der Clip wird publiziert.
+clip_onupload#:#Bitte haben Sie etwas Geduld. Der Clip wird derzeit für die spätere Bearbeitung vorbereitet.
+clip_status_created#:#Clip noch nicht publiziert, nicht sichtbar für Studierende
+clip_status_importing#:#Clip wird importiert
+clip_status_preparing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
+clip_status_processing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
+clip_status_error#:#Es ist ein Fehler bei SwitchCast aufgetreten
+clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
+clips#:#Clips
+tab_configure#:#SwitchCast konfigurieren
+tab_content#:#Inhalt
+tab_user#:#Benutzer löschen
+tab_context#:#Kontext
+create_a_group#:#Bitte erstellen Sie zuerst eine Gruppe.
+crs_create_xsca#:#SWITCHCast Channel anlegen
+date#:#Datum
+delete_group_confirmation#:#Wollen Sie die Gruppe wirklich löschen?
+department#:#Department
+department_desc#:#How is the name of your department?
+discipline_0#:#Disziplin
+discipline_1#:#Disziplin
+discipline_2#:#Disziplin
+dont_allow_annotations#:#Keine Annotationen
+download_clip#:#Clip herunterladen
+download_tooltip#:#Falls der Download nicht startet, führen Sie einen Rechtsklick auf den Link aus und wählen Sie "(Ziel) Speicher unter..."
+edit#:#Bearbeiten
+edit_switchcast_channel#:#Bearbeitung bei SWITCHcast.ch
+email#:#E-Mail
+estimated_content_in_hours#:#Estimated video content in hours
+estimated_content_in_hours_desc#:#How many video material (in hours) do you intend to publish in this channel?
+export_xml#:#Einstellungen als XML exportieren
+filt_ivt_owner#:#Besitzer (AAI-UniqueId)
+flash#:#Stream
+fold_create_xsca#:#SWITCHCast Channel anlegen
+fullname#:#Name
+group#:#Gruppe
+groups#:#Gruppen
+grp_create_xsca#:#SWITCHCast Channel anlegen
+import_xml#:#Einstellungen als XML importieren
+ipod#:#Mobile
+lifetime_of_content_in_months#:#Intended lifetime of content
+lifetime_of_content_in_months_desc#:#How long shoud the video material be published?
+member#:#Mitglied
+msg_obj_modified#:#Änderungen gespeichert
+msg_reload_clips#:#Die Clips werden neu geladen. Dies kann einen Moment dauern.
+no_channels_available#:#Es sind keine vorhandenen Channels verfügbar.
+no_external_id#:#In ILIAS wurde keine SWITCHaai-ID von Ihnen gefunden.
+no_group_info#:#Gruppenfunktionalität: Sie können die Benutzenden in Gruppen einteilen. Wenn Sie eine Person als Besitzer eines Clips definieren, dann erhalten alle Personen, die in den gleichen Gruppen sind, ebenfalls Zugriff auf diesen Clip.
+no_owner#:#kein Besitzer
+not_assigned#:#nicht zugewiesen
+obj_xsca#:#SWITCHcast Channel
+obj_xsca#:#SWITCHcast Channel
+obj_xsca_duplicate#:#Kopieren
+obj_xsca_select#:#SWITCHcast Channel auswählen
+objs_xsca#:#SWITCHcast Channels
+objs_xsca_duplicate#:#SWITCHcast Channel kopieren
+offline#:#Offline
+owner#:#Besitzer
+owner_unknown#:#Besitzer ist ILIAS nicht bekannt
+permission_denied#:#Zugriff verweigert
+#:#
+preview#:#Vorschau
+properties#:#Eigenschaften
+quicktime#:#Desktop
+recordingstation#:#Aufnamestation
+remove#:#Entfernen
+rep_robj_xsca_obj_xsca#:#SWITCHcast Channel
+rep_robjs_xsca_obj_xsca#:#SWITCHcast Channels
+save#:#Speichern
+select_a_group#:#Wählen Sie eine Gruppe.
+status#:#Status
+streaming_only#:#Ausschliesslich Streaming
+success_edit#:#Gespeichert
+update#:#Speichern
+without_owner#:#Ohne Besitzer
+xsca_add#:#SWITCHcast Channel hinzufügen
+xsca_delete#:#Löschen: Channel löschen
+xsca_edit_permission#:#Rechteeinstellungen ändern: Rechteeinstellungen ändern
+xsca_new#:#Einen neuen SWITCHcast Channel erstellen
+xsca_read#:#Lesezugriff: Lesezugriff auf Channel
+xsca_visible#:#Anzeigen: Channel ist sichtbar
+xsca_write#:#Bearbeiten: Channel-Einstellungen bearbeiten
+#:#
+#:#
+#:#
+#:#
+#:#
 admin_config_allow_test_channels#:#Testchannels erlauben
 admin_config_form_button_save#:#Speichern
 admin_config_form_button_cancel#:#Abbrechen
@@ -68,136 +209,3 @@ admin_config_title_switch#:#SwitchCast
 admin_config_title_sysaccounts#:#System-Account der entsprechenden Organisation.
 admin_form_button_cancel#:#Abbrechen
 admin_form_button_save#:#Speichern
-agreement_title#:#Service Conditions
-allow_annotations#:#Annotationen erlauben
-annotations#:#Annotationen
-available_participants#:#Verfügbare Kursteilnehmer
-back_to_list#:#Zurück
-cancel#:#Abbrechen
-cast_back_to_list#:#Zurück zur Liste
-channel#:#Channel
-channel_author#:#Channel Autor
-channel_chaptering#:#Auto chaptering
-channel_chaptering_desc#:#Enable auto chaptering for each uploaded media. Auto chaptering based on OCR scanning of the slides.
-channel_description#:#Beschreibung
-channel_discipline#:#Disziplin
-channel_extid#:#Channel-Ext-ID
-channel_extid_desc#:#Die externe Channel-ID müssten Sie beim Podcast-Support der Uni Bern nachfragen. Bitte senden Sie ein Mail an <a href="mailto:podcast@id.unibe.ch">podcast@id.unibe.ch</a>  mit der SWITCHcast Channel Nummer.
-channel_id#:#Channel ID
-channel_kind#:#Channel-Typ
-channel_kind_productiv#:#Produktiv
-channel_kind_test#:#Test
-channel_name#:#Channel Name
-channel_searchability#:#Searchability
-channel_searchability_desc#:#Channel content is publicly <a target="_blank" href="https://collection.switch.ch/">searchable in SWITCHcollection</a>. Clips will be licensed in SWITCHcollection under Creative Commons Attribution-Noncommercial-No Derivative Works 2.5 Switzerland.
-channel_streamingonly#:#Nur Streaming
-channel_streamingonly_desc#:#A stream can only be watched via an internet connection using the SWITCH video player software
-channel_type#:#Channel type
-clip_based_rightmanagement#:#Rechte für einzelne Clips setzen
-clip_based_rightmanagement_desc#:#Diese Einstellung aktiviert eine individuelle Rechteverwaltung auf Clip-Ebene (iVT-Modus). Lassen Sie Einstellung deaktiviert, wenn alle Kursteilnehmer sämtliche Aufzeichnungen des gewählten Kanals sehen dürfen.
-clip_confirm_delete#:#Das Löschen bewirkt, dass der Clip auch auf SWITCHCast gelöscht wird. Wollen Sie diesen Clip wirklich löschen?
-clip_deleted#:#Der Clip wurde gelöscht.
-clip_inviting_possible#:#Clip-Besitzer können Leserechte auf Ihre Clips erteilen
-clip_onpublishing#:#Bitte haben Sie etwas Geduld. Der Clip wird publiziert.
-clip_onupload#:#Bitte haben Sie etwas Geduld. Der Clip wird derzeit für die spätere Bearbeitung vorbereitet.
-clip_status_created#:#Clip noch nicht publiziert, nicht sichtbar für Studierende
-clip_status_importing#:#Clip wird importiert
-clip_status_preparing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
-clip_status_processing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
-clip_status_error#:#Es ist ein Fehler bei SwitchCast aufgetreten
-clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
-clips#:#Clips
-tab_configure#:#SwitchCast konfigurieren
-tab_content#:#Inhalt
-tab_user#:#Benutzer löschen
-tab_context#:#Kontext
-create_a_group#:#Bitte erstellen Sie zuerst eine Gruppe.
-crs_create_xsca#:#SWITCHCast Channel anlegen
-cut_switch#:#Clip schneiden
-date#:#Datum
-delete_clip#:#Clip löschen
-delete_group_confirmation#:#Wollen Sie die Gruppe wirklich löschen?
-department#:#Department
-department_desc#:#How is the name of your department?
-description#:#Beschreibung
-discipline_0#:#Disziplin
-discipline_0_desc#:#
-discipline_0_desc#:#
-discipline_0_desc#:#
-discipline_1#:#Disziplin
-discipline_2#:#Disziplin
-dont_allow_annotations#:#Keine Annotationen
-download_clip#:#Clip herunterladen
-download_tooltip#:#Falls der Download nicht startet, führen Sie einen Rechtsklick auf den Link aus und wählen Sie "(Ziel) Speicher unter..."
-edit#:#Bearbeiten
-edit_clip#:#Clip bearbeiten
-edit_members#:#Mitglieder bearbeiten
-edit_owner#:#Besitzer bearbeiten
-edit_properties#:#Eigenschaften bearbeiten
-edit_switchcast_channel#:#Bearbeitung bei SWITCHcast.ch
-email#:#E-Mail
-estimated_content_in_hours#:#Estimated video content in hours
-estimated_content_in_hours_desc#:#How many video material (in hours) do you intend to publish in this channel?
-existing_channel#:#Existing Channel
-export_xml#:#Einstellungen als XML exportieren
-filt_ivt_owner#:#Besitzer (AAI-UniqueId)
-flash#:#Stream
-fold_create_xsca#:#SWITCHCast Channel anlegen
-fullname#:#Name
-group#:#Gruppe
-groups#:#Gruppen
-grp_create_xsca#:#SWITCHCast Channel anlegen
-has_references#:#Dieser SWITCHcast-Channel wird in ILIAS mehrfach verwendet. Änderungen, welche Sie hier vornehmen, werden auf alle Referenzen übertragen!
-import_xml#:#Einstellungen als XML importieren
-introduction_text#:#Arbeitsanweisung
-ipod#:#Mobile
-license#:#Lizenz
-license_desc#:#For detailed information, visit <a target='_blank' href='http://creativecommons.org/international/ch/'>Creative Commons International (Switzerland)</a>
-lifetime_of_content_in_months#:#Intended lifetime of content
-lifetime_of_content_in_months_desc#:#How long shoud the video material be published?
-location#:#Ort
-member#:#Mitglied
-msg_obj_modified#:#Änderungen gespeichert
-msg_reload_clips#:#Die Clips werden neu geladen. Dies kann einen Moment dauern.
-new_channel#:#New Channel
-no_channels_available#:#Es sind keine vorhandenen Channels verfügbar.
-no_external_id#:#In ILIAS wurde keine SWITCHaai-ID von Ihnen gefunden.
-no_group_info#:#Gruppenfunktionalität: Sie können die Benutzenden in Gruppen einteilen. Wenn Sie eine Person als Besitzer eines Clips definieren, dann erhalten alle Personen, die in den gleichen Gruppen sind, ebenfalls Zugriff auf diesen Clip.
-no_owner#:#kein Besitzer
-not_assigned#:#nicht zugewiesen
-obj_xsca#:#SWITCHcast Channel
-obj_xsca#:#SWITCHcast Channel
-obj_xsca_duplicate#:#Kopieren
-obj_xsca_select#:#SWITCHcast Channel auswählen
-objs_xsca#:#SWITCHcast Channels
-objs_xsca_duplicate#:#SWITCHcast Channel kopieren
-offline#:#Offline
-online#:#Online
-owner#:#Besitzer
-owner_unknown#:#Besitzer ist ILIAS nicht bekannt
-permission_denied#:#Zugriff verweigert
-presenter#:#Presenter
-preview#:#Vorschau
-properties#:#Eigenschaften
-quicktime#:#Desktop
-recordingstation#:#Aufnamestation
-reload_clips#:#Clips neu laden
-remove#:#Entfernen
-rep_robj_xsca_obj_xsca#:#SWITCHcast Channel
-rep_robjs_xsca_obj_xsca#:#SWITCHcast Channels
-save#:#Speichern
-select_a_group#:#Wählen Sie eine Gruppe.
-select_existing_channel#:#Wählen Sie einen bestehenden Channel
-status#:#Status
-streaming_only#:#Ausschliesslich Streaming
-success_edit#:#Gespeichert
-title#:#Titel
-update#:#Speichern
-without_owner#:#Ohne Besitzer
-xsca_add#:#SWITCHcast Channel hinzufügen
-xsca_delete#:#Löschen: Channel löschen
-xsca_edit_permission#:#Rechteeinstellungen ändern: Rechteeinstellungen ändern
-xsca_new#:#Einen neuen SWITCHcast Channel erstellen
-xsca_read#:#Lesezugriff: Lesezugriff auf Channel
-xsca_visible#:#Anzeigen: Channel ist sichtbar
-xsca_write#:#Bearbeiten: Channel-Einstellungen bearbeiten

@@ -337,7 +337,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$edit_mode = true;
 			if (is_object($this->object)) {
 				if ($this->object->hasReferencedChannels() > 1) {
-					ilUtil::sendInfo($this->txt('has_references'));
+					ilUtil::sendInfo($this->txt('channel_has_references'));
 				}
 			}
 		} else {
@@ -350,8 +350,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		// Channel
 		if (!$edit_mode) {
 			// Channel
-			$radio_prop = new ilRadioGroupInputGUI($this->txt('channel'), 'channel_type');
-			$op = new ilRadioOption($this->txt('new_channel'), '1', '');
+			$radio_prop = new ilRadioGroupInputGUI($this->txt('channel_type'), 'channel_type');
+			$op = new ilRadioOption($this->txt('channel_type_new'), '1', '');
 			$radio_prop->addOption($op);
 			// Test- oder Produktiv-Channel - wird nur angezeigt, falls diese Funktion in der ILIAS-Administration aktiviert  wird
 			if (xscaConfig::get('allow_test_channels')) {
@@ -365,8 +365,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			}
 			// Existing Channel
 			if (!xscaConfig::get('deactivate_get_existing')) {
-				$op2 = new ilRadioOption($this->txt('existing_channel'), '2', '');
-				$cb_prop = new ilSelectInputGUI($this->txt('select_existing_channel'), self::F_CHANNEL_ID);
+				$op2 = new ilRadioOption($this->txt('channel_type_existing'), '2', '');
+				$cb_prop = new ilSelectInputGUI($this->txt('channel_type_existing_select'), self::F_CHANNEL_ID);
 				$cb_prop->setOptions($this->xsca_user->getChannelsOfUser(true));
 				$op2->addSubItem($cb_prop);
 				if (count($this->xsca_user->getChannelsOfUser(true)) == 0) {
@@ -380,23 +380,23 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$this->form->addItem($radio_prop);
 		}
 		// title
-		$ti = new ilTextInputGUI($this->txt('title'), 'title');
+		$ti = new ilTextInputGUI($this->txt('channel_title'), 'title');
 		if ($this->dev) {
 			$ti->setValue('TCn_ilias: ' . date(DATE_ISO8601));
 		}
 		$ti->setRequired(true);
 		$this->form->addItem($ti);
 		// subtitle
-		$ta = new ilTextAreaInputGUI($this->txt('description'), 'desc');
+		$ta = new ilTextAreaInputGUI($this->txt('channel_description'), 'desc');
 		$this->form->addItem($ta);
 		// Online
 		if ($edit_mode) {
-			$online = new ilCheckboxInputGUI($this->pl->txt('online'), 'online');
+			$online = new ilCheckboxInputGUI($this->pl->txt('channel_online'), 'online');
 			$online->setChecked($this->object->getOnline());
 			$this->form->addItem($online);
 		}
 		//Work Instructions
-		$item = new ilTextAreaInputGUI($this->txt('introduction_text'), 'introduction_text');
+		$item = new ilTextAreaInputGUI($this->txt('channel_introduction_text'), 'introduction_text');
 		$item->setRows(5);
 		$this->form->addItem($item);
 		// Discipline 1
@@ -416,10 +416,10 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		// License
 		$lic = $this->object->getAllLicenses();
 		if (is_array($lic) AND count($lic) > 0) {
-			$licform = new ilSelectInputGUI($this->txt('license'), 'license');
+			$licform = new ilSelectInputGUI($this->txt('channel_license'), 'license');
 			$licform->setOptions($lic);
 			$licform->setRequired(false);
-			$licform->setInfo($this->txt('license_desc'));
+			$licform->setInfo($this->txt('channel_license_desc'));
 			$this->form->addItem($licform);
 		}
 		// Estimated Video Content
@@ -472,8 +472,8 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$this->form->addItem($cb);
 		// Type (IVT or Scast)
 		if (!xscaConfig::get('deactivate_ivt')) {
-			$cb = new ilCheckboxInputGUI($this->txt('clip_based_rightmanagement'), 'clip_based_rightmanagement');
-			$cb->setInfo($this->txt('clip_based_rightmanagement_desc'));
+			$cb = new ilCheckboxInputGUI($this->txt('channel_clip_based_rightmanagement'), 'clip_based_rightmanagement');
+			$cb->setInfo($this->txt('channel_clip_based_rightmanagement_desc'));
 			$cb->setValue(1);
 			$subcb = new ilCheckboxInputGUI($this->txt('clip_inviting_possible'), 'clip_inviting_possible');
 			$subcb->setValue(1);
@@ -482,7 +482,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		}
 		// EULA
 		if (xscaConfig::get(xscaConfig::F_USE_EULA) AND !$edit_mode) {
-			$cb = new ilCheckboxInputGUI($this->pl->txt('accept_eula'), 'accept_eula');
+			$cb = new ilCheckboxInputGUI($this->pl->txt('channel_accept_eula'), 'accept_eula');
 			$cb->setRequired(true);
 			$cb->setInfo(xscaConfig::get(xscaConfig::F_EULA_TEXT));
 			//			$cb->setValue(1);

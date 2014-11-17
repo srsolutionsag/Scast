@@ -42,19 +42,19 @@ class xscaClipFormGUI extends ilPropertyFormGUI {
 	private function initForm() {
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui, $_GET['fallbackCmd']));
 		if ($this->clip->getExtId() == 0) {
-			$this->setTitle($this->pl->txt('create_clip'));
+			$this->setTitle($this->pl->txt('clip_create'));
 		} else {
-			$this->setTitle($this->pl->txt('edit_clip'));
+			$this->setTitle($this->pl->txt('clip_edit'));
 		}
 		// Title
-		$title = new ilTextInputGUI($this->pl->txt('title'), 'title');
+		$title = new ilTextInputGUI($this->pl->txt('clip_title'), 'title');
 		$title->setRequired(true);
 		$this->addItem($title);
 		// Presenter
-		$ti = new ilTextInputGUI($this->pl->txt('presenter'), 'presenter');
+		$ti = new ilTextInputGUI($this->pl->txt('clip_presenter'), 'presenter');
 		$this->addItem($ti);
 		// Ort
-		$ti = new ilTextInputGUI($this->pl->txt('location'), 'location');
+		$ti = new ilTextInputGUI($this->pl->txt('clip_location'), 'location');
 		$this->addItem($ti);
 		$this->addCommandButtons();
 	}
@@ -106,10 +106,10 @@ class xscaClipFormGUI extends ilPropertyFormGUI {
 
 	protected function addCommandButtons() {
 		if ($this->clip->getExtId() == 0) {
-			$this->addCommandButton('create', $this->pl->txt('create_clip'));
+			$this->addCommandButton('create', $this->pl->txt('clip_create'));
 		} else {
-			$this->addCommandButton('update', $this->pl->txt('save'));
+			$this->addCommandButton('update', $this->pl->txt('clip_update'));
 		}
-		$this->addCommandButton('cancel', $this->pl->txt('cancel'));
+		$this->addCommandButton('cancel', $this->pl->txt('clip_cancel'));
 	}
 }

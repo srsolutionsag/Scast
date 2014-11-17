@@ -51,9 +51,9 @@ class xscaClipTableGUI extends ilTable2GUI {
 		$this->setExportFormats(array( self::EXPORT_CSV ));
 		// Nur falls Schreibberechtigt und falls External-Account (SWITCHaai vorhanden)
 		if (ilObjScastAccess::checkSwitchCastUseage()) {
-			$this->toolbar->addButton($this->pl->txt('add_clip'), $this->objScast->getUploadForm(), '_blank');
+			$this->toolbar->addButton($this->pl->txt('clip_add'), $this->objScast->getUploadForm(), '_blank');
 		}
-		$this->toolbar->addButton($this->pl->txt('reload_clips'), $this->ctrl->getLinkTarget($this->objScastGui, 'reloadCache'), '', '', '', 'reloadCache');
+		$this->toolbar->addButton($this->pl->txt('clip_reload'), $this->ctrl->getLinkTarget($this->objScastGui, 'reloadCache'), '', '', '', 'reloadCache');
 		$arrSelectedColumns = $this->getSelectedColumns();
 		$this->addColumn($this->pl->txt('preview'), '', '170px');
 		$this->addColumn($this->pl->txt('clips'), '', '120px');
@@ -229,24 +229,24 @@ class xscaClipTableGUI extends ilTable2GUI {
 			if (ilObjScastAccess::checkAccessOnClip($clip, 'write')) {
 				$alist = new ilAdvancedSelectionListGUI();
 				$alist->setId($a_set->id);
-				$alist->setListTitle($this->pl->txt('actions'));
+				$alist->setListTitle($this->pl->txt('clip_actions'));
 				$this->ctrl->setParameterByClass('ilObjScastGUI', 'clip_ext_id', $clip->getExtId());
 				if ($this->objScast->getIvt() AND ($this->objScast->getInvitingPossible() AND ($clip->getOwner() == $this->user->getExternalAccount()
 							OR $this->access->checkAccess('write', '', $this->objScast->getRefId())))
 				) {
-					$alist->addItem($this->pl->txt('edit_members'), 'editmembers', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'editClipMembers'));
+					$alist->addItem($this->pl->txt('clip_edit_members'), 'editmembers', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'editClipMembers'));
 				}
 				if ($this->objScast->getIvt() AND $this->access->checkAccess('write', '', $this->objScast->getRefId())
 				) {
-					$alist->addItem($this->pl->txt('edit_owner'), 'edit', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'editClipOwner'));
+					$alist->addItem($this->pl->txt('clip_edit_owner'), 'edit', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'editClipOwner'));
 				}
 				if ($this->access->checkAccess('write', '', $this->objScast->getRefId())) {
 					// $alist->addItem($this->pl->txt('edit_switchcast_channel'), 'editchannel', $this->objScast->getEditLink(), NULL, NULL, '_blank');
-					$alist->addItem($this->pl->txt('cut_switch'), 'cut', $clip->getLinkCuttingTool(), NULL, NULL, '_blank');
+					$alist->addItem($this->pl->txt('clip_cut_switch'), 'cut', $clip->getLinkCuttingTool(), NULL, NULL, '_blank');
 				}
 				if ($this->access->checkAccess('write', '', $this->objScast->getRefId())) {
-					$alist->addItem($this->pl->txt('delete_clip'), 'deleteclip', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'confirmDeleteClip'));
-					$alist->addItem($this->pl->txt('edit_clip'), 'edit', $this->ctrl->getLinkTargetByClass('xscaClipGUI', 'edit'));
+					$alist->addItem($this->pl->txt('clip_delete'), 'deleteclip', $this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'confirmDeleteClip'));
+					$alist->addItem($this->pl->txt('clip_edit'), 'edit', $this->ctrl->getLinkTargetByClass('xscaClipGUI', 'edit'));
 				}
 				$this->tpl->setVariable('ACTIONS', $alist->getHTML());
 			}
