@@ -84,17 +84,25 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 				return true;
 			}
 		} elseif ($a_perm == 'read') {
-			$arr_clip_members = $clip->getMembers();
 
 			$write_permission = self::checkAccessOnClipForAllReferences($clip, 'write');
-			$read_permission = self::checkAccessOnClipForAllReferences($clip, 'read');
-			$owner = $ilUser->getExternalAccount() == $clip->getOwner() AND $ilUser->getExternalAccount() != '' AND $clip->getOwner() != '';
-			$clip_member = array_search($ilUser->getId(), $arr_clip_members);
-			if (($write_permission) OR ($owner) OR $clip_member
-				OR xscaGroup::checkSameGroup($ilObjScast->getId(), $clip->getOwnerILIASId(), $ilUser->getId()) OR ($ilObjScast->getIvt() == false
-					AND $read_permission)
-			) {
+			if ($write_permission) {
 				return true;
+			}
+			$read_permission = self::checkAccessOnClipForAllReferences($clip, 'read');
+			if ($read_permission) {
+				$owner = $ilUser->getExternalAccount() == $clip->getOwner() AND $ilUser->getExternalAccount() != '' AND $clip->getOwner() != '';
+				if ($owner) {
+					return true;
+				}
+				$arr_clip_members = $clip->getMembers();
+				$clip_member = in_array($ilUser->getId(), $arr_clip_members);
+				if ($clip_member) {
+					return true;
+				}
+				if (xscaGroup::checkSameGroup($ilObjScast->getId(), $clip->getOwnerILIASId(), $ilUser->getId())) {
+					return true;
+				}
 			}
 		}
 

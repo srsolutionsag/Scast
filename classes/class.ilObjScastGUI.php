@@ -626,11 +626,10 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		 */
 		$target = xscaTarget::get($a_target);
 		$ref_id = $target->getRefId();
-		if ($target->getIsSwitchRedirect()) {
 
+		if ($target->getIsSwitchRedirect()) {
 			$clip = xscaClip::getInstance($target->getChannelId(), $target->getClipId());
 			ilObjScastAccess::checkAccessOnClipForAllReferences($clip);
-
 			if (ilObjScastAccess::checkAccessOnClip($clip, 'read', $ref_id)) {
 				xscaToken::extAuthRedirectToVodUrl($target);
 			} else {
