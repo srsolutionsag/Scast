@@ -91,7 +91,7 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 			}
 			$read_permission = self::checkAccessOnClipForAllReferences($clip, 'read');
 			if ($read_permission) {
-                if($ilObjScast->getIvt()){
+                if(!$ilObjScast->getIvt()){
                     return true;
                 }
 
