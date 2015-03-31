@@ -1,6 +1,6 @@
 <?php
 $id = 'xsca';
-$version = '3.0.5';
+$version = '3.0.6';
 $ilias_min_version = '4.2.0';
 $ilias_max_version = '4.4.999';
 $responsible = 'Fabian Schmid, Martin Studer';

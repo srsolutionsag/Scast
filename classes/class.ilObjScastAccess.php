@@ -91,6 +91,10 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 			}
 			$read_permission = self::checkAccessOnClipForAllReferences($clip, 'read');
 			if ($read_permission) {
+                if(!$ilObjScast->getIvt()){
+                    return true;
+                }
+
 				$owner = $ilUser->getExternalAccount() == $clip->getOwner() AND $ilUser->getExternalAccount() != '' AND $clip->getOwner() != '';
 				if ($owner) {
 					return true;
