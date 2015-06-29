@@ -1,6 +1,7 @@
-tr.status_created, tr.status_importing, tr.status_processing  {
-	background-color: #FFD5D1;
+tr.status_created, tr.status_importing, tr.status_processing,.status_preparing, tr.status_created td, tr.status_importing td, .status_processing td  {
+	background-color: #FFD5D1 !important;
 }
+
 
 span.clip_status {
 	clear: both;

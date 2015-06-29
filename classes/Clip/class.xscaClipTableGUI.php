@@ -110,15 +110,15 @@ class xscaClipTableGUI extends ilTable2GUI {
 	public function getSelectableColumns() {
 		$cols = array();
 		$cols['title'] = array(
-			'txt' => $this->pl->txt('title'),
+			'txt' => $this->pl->txt('clip_title'),
 			'default' => true
 		);
 		$cols['presenter'] = array(
-			'txt' => $this->pl->txt('presenter'),
+			'txt' => $this->pl->txt('clip_presenter'),
 			'default' => true
 		);
 		$cols['location'] = array(
-			'txt' => $this->pl->txt('location'),
+			'txt' => $this->pl->txt('clip_location'),
 			'default' => true
 		);
 		// Recording-Station ivt
@@ -294,15 +294,15 @@ class xscaClipTableGUI extends ilTable2GUI {
 
 
 	public function initFilter() {
-		$input = new ilTextInputGUI($this->pl->txt('title'), 'title');
+		$input = new ilTextInputGUI($this->pl->txt('clip_title'), 'title');
 		$this->addFilterItem($input);
 		$input->readFromSession();
 		$this->filter['title'] = $input->getValue();
-		$input = new ilTextInputGUI($this->pl->txt('presenter'), 'presenter');
+		$input = new ilTextInputGUI($this->pl->txt('clip_presenter'), 'presenter');
 		$this->addFilterItem($input);
 		$input->readFromSession();
 		$this->filter['presenter'] = $input->getValue();
-		$input = new ilTextInputGUI($this->pl->txt('location'), 'location');
+		$input = new ilTextInputGUI($this->pl->txt('clip_location'), 'location');
 		$this->addFilterItem($input);
 		$input->readFromSession();
 		$this->filter['location'] = $input->getValue();

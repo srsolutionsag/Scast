@@ -34,6 +34,7 @@ class ilObjScastListGUI extends ilObjectPluginListGUI {
 	 */
 	public function initCommands() {
 		$this->copy_enabled = false;
+        $this->enableTags(true);
 		global $objDefinition;
 		/**
 		 * @var $objDefinition ilObjectDefinition
