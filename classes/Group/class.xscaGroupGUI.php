@@ -54,7 +54,7 @@ class xscaGroupGUI {
 		if (! $this->scast) {
 			$this->scast = new ilObjScast($this->ref_id);
 		}
-		$this->participants = new ilParticipants($this->scast->getCourseId());
+		$this->participants = new ilCourseParticipants($this->scast->getCourseId());
 	}
 
 
@@ -117,7 +117,7 @@ class xscaGroupGUI {
 			$temp->setVariable('PARTICIPANT', $participant['fullname']);
 			$temp->setVariable('PARTICIPANT_EMAIl', $participant['email']);
 			$temp->setVariable('PARTICIPANT_ID', $participant['id']);
-			$temp->setVariable('PARTICIPANT_ADD', $this->pl->txt('add'));
+			$temp->setVariable('PARTICIPANT_ADD', $this->pl->txt('add_member'));
 			// GET USER IMAGE
 			$temp->setVariable('PARTICIPANT_IMAGE', $participant['image']);
 			$temp->parseCurrentBlock();

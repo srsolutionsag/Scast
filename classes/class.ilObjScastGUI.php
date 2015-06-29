@@ -118,6 +118,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				break;
 			default:
 				$this->initHeader(false);
+
 				parent::executeCommand();
 				break;
 		}
@@ -148,6 +149,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 */
 	protected function initHeader($clear_tabs = true) {
 		global $lng;
+
 		if (!$this->object instanceof ilObjScast) {
 			return false;
 		}
@@ -155,6 +157,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$this->tpl->setDescription($this->object->getDescription());
 		$this->tpl->setTitleIcon(ilObject::_getIcon(ilObject::_lookupObjId($_GET[self::REF_ID]), "big"), $lng->txt("obj_"
 			. ilObject::_lookupType($_GET[self::REF_ID], true)));
+            
 		$this->tpl->setLocator();
 		if ($clear_tabs) {
 			$this->tabs_gui->clearTargets();
@@ -230,7 +233,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 
 	protected function setTabs() {
 		if ($this->access->checkAccess('read', '', $this->object->getRefId())) {
-			$this->tabs_gui->addTab('content', $this->txt('content'), $this->ctrl->getLinkTarget($this, 'showContent'));
+			$this->tabs_gui->addTab('content', $this->txt('tab_content'), $this->ctrl->getLinkTarget($this, 'showContent'));
 		}
 		$this->addInfoTab();
 		if ($this->access->checkAccess('write', '', $this->object->getRefId())) {
@@ -289,9 +292,11 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			$newObj->setIntroductionText($this->form->getInput('introduction_text'));
 			$newObj->setChannelKind($this->form->getInput('channel_kind'));
 
+
 			// Falls bestehender Channel
 			if ($this->form->getInput('channel_type') == '2') {
 				$newObj->setExtId($this->form->getInput(self::F_CHANNEL_ID));
+
 			}
 			try {
 				$newObj->create();
@@ -609,7 +614,9 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		foreach ($data as $clip) {
 			xscaClip::getInstance($this->object->getExtId(), $clip->ext_id);
 		}
+        
 		ilUtil::sendSuccess($this->pl->txt('msg_cache_flushed'), true);
+        $this->showContent();
 	}
 
 
@@ -618,7 +625,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 *
 	 * @access static
 	 */
-	public function _goto($a_target) {
+	static public function _goto($a_target) {
 		global $lng, $ilAccess;
 		/**
 		 * @var $ilAccess ilAccessHandler

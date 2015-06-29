@@ -40,7 +40,7 @@ class xscaClipMembersTableGUI extends ilTable2GUI {
 		$this->setFormAction($ilCtrl->getFormActionByClass('ilobjscastgui', 'editClipMembers'));
 		$this->addColumn($this->pl->txt('fullname'), 'name', 'auto');
 		$this->addColumn($this->pl->txt('email'), 'email', 'auto');
-		$this->addColumn($this->pl->txt('context'), 'context', 'auto');
+		$this->addColumn($this->pl->txt('tab_context'), 'context', 'auto');
 		$this->addColumn($this->pl->txt('actions'), 'actions', 'auto');
 		$this->setRowTemplate('tpl.clipmembers_table.html', $this->pl->getDirectory());
 	}

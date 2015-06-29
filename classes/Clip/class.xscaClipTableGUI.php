@@ -7,7 +7,7 @@ require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/
 require_once('./Services/Utilities/classes/class.ilCSVWriter.php');
 require_once("./Services/Excel/classes/class.ilExcelUtils.php");
 require_once("./Services/Excel/classes/class.ilExcelWriterAdapter.php");
-
+require_once("./Services/UIComponent/Button/classes/class.ilLinkButton.php");
 /**
  * GUI class for course/group waiting list
  *
@@ -51,20 +51,29 @@ class xscaClipTableGUI extends ilTable2GUI {
 		$this->setExportFormats(array( self::EXPORT_CSV ));
 		// Nur falls Schreibberechtigt und falls External-Account (SWITCHaai vorhanden)
 		if (ilObjScastAccess::checkSwitchCastUseage()) {
-			$this->toolbar->addButton($this->pl->txt('clip_add'), $this->objScast->getUploadForm(), '_blank');
+		    
+		    $addButton = ilLinkButton::getInstance();
+            $addButton->setCaption($this->pl->txt('clip_add'),false);
+            $addButton->setUrl($this->objScast->getUploadForm());
+            $addButton->setTarget('_blank');
+			$this->toolbar->addButtonInstance($addButton);
 		}
-		$this->toolbar->addButton($this->pl->txt('clip_reload'), $this->ctrl->getLinkTarget($this->objScastGui, 'reloadCache'), '', '', '', 'reloadCache');
+        $cacheButton = ilLinkButton::getInstance();
+        $cacheButton->setCaption($this->pl->txt('clip_reload'),false);
+        $cacheButton->setUrl($this->ctrl->getLinkTarget($this->objScastGui, 'reloadCache'));
+        $this->toolbar->addButtonInstance($cacheButton);
+        
 		$arrSelectedColumns = $this->getSelectedColumns();
 		$this->addColumn($this->pl->txt('preview'), '', '170px');
 		$this->addColumn($this->pl->txt('clips'), '', '120px');
 		if ($arrSelectedColumns['title']) {
-			$this->addColumn($this->pl->txt('title'), 'title', 'auto');
+			$this->addColumn($this->pl->txt('clip_title'), 'title', 'auto');
 		}
 		if ($arrSelectedColumns['presenter']) {
-			$this->addColumn($this->pl->txt('presenter'), 'presenter', 'auto');
+			$this->addColumn($this->pl->txt('clip_presenter'), 'presenter', 'auto');
 		}
 		if ($arrSelectedColumns['location']) {
-			$this->addColumn($this->pl->txt('location'), 'location', 'auto');
+			$this->addColumn($this->pl->txt('clip_location'), 'location', 'auto');
 		}
 		//Recording-Station ivt
 		if ($this->objScast->getIvt()) {
@@ -305,7 +314,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 			$this->filter['ivt__recordingstation'] = $input->getValue();
 		}
 		if ($this->access->checkAccess('write', '', $this->objScast->getRefId()) AND $this->objScast->getIvt()) {
-			$ilParticipants = new ilParticipants($this->objScast->getCourseId());
+			$ilParticipants = new ilCourseParticipants($this->objScast->getCourseId());
 			$arr_participants = array();
 			$arr_participants[''] = '--';
 			foreach ($ilParticipants->getParticipants() as $user_id) {
