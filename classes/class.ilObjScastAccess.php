@@ -28,19 +28,17 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 		if ($a_user_id == '') {
 			$a_user_id = $ilUser->getId();
 		}
+
 		switch ($a_permission) {
 			case 'visible':
 			case 'read':
-				if (ilObjScastAccess::checkOnline($a_obj_id) AND !$ilAccess->checkAccessOfUser($a_user_id, 'write', '', $a_ref_id)
-				) {
-					return true;
+				if (!ilObjScastAccess::checkOnline($a_obj_id) AND !$ilAccess->checkAccessOfUser($a_user_id, 'write', '', $a_ref_id))
+				{
+					return false;
 				}
 				break;
 			case 'write':
 			case 'edit_permission':
-				if ($ilAccess->checkAccessOfUser($a_user_id, $a_permission, '', $a_ref_id)) {
-					return true;
-				}
 				break;
 		}
 

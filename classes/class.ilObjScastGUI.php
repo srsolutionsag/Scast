@@ -650,15 +650,9 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			} elseif ($ilAccess->checkAccess('visible', '', $ref_id)) {
 				self::redirectToGUI($target, 'infoScreen');
 			} elseif ($ilAccess->checkAccess('read', '', ROOT_FOLDER_ID)) {
-				if (xscaConfig::get('goto') == xscaConfig::GOTO_REPO) {
-					ilUtil::sendFailure(sprintf($lng->txt('msg_no_perm_read_item'), ilObject::_lookupTitle(ilObject::_lookupObjId($ref_id))), true);
-					ilObjectGUI::_gotoRepositoryRoot();
-					exit;
-				} elseif (xscaConfig::get('goto') == xscaConfig::GOTO_LOGIN) {
-					ilUtil::redirect('login.php?target=' . $_GET['target'] . '&cmd=force_login');
-					exit;
-				}
-			}
+                ilUtil::sendFailure(sprintf($lng->txt('msg_no_perm_read_item'), ilObject::_lookupTitle(ilObject::_lookupObjId($ref_id))), true);
+                ilObjectGUI::_gotoRepositoryRoot();
+            }
 		}
 		exit;
 	}
