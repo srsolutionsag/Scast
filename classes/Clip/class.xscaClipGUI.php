@@ -136,9 +136,9 @@ class xscaClipGUI {
 		$this->ctrl->setParameterByClass('ilObjScastGUI', 'clip_ext_id', $this->clip->getExtId());
 		// Form
 		$this->clip_owner_form = new ilPropertyFormGUI();
-		$this->clip_owner_form->setTitle($this->pl->txt('edit_owner'));
+		$this->clip_owner_form->setTitle($this->pl->txt('clip_edit_owner'));
 		$this->clip_owner_form->setFormAction($this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'updateClipOwner'));
-		$ilParticipants = new ilParticipants($this->objScast->getCourseId());
+		$ilParticipants = new ilCourseParticipants($this->objScast->getCourseId());
 		$arr_participants = array();
 		$arr_participants[''] = '--' . $this->pl->txt('not_assigned') . '--';
 		foreach ($ilParticipants->getParticipants() as $user_id) {
