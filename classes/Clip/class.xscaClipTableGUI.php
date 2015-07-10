@@ -180,28 +180,28 @@ class xscaClipTableGUI extends ilTable2GUI {
 			$this->tpl->setCurrentBlock('flash');
 			$this->tpl->setVariable('LinkFlash', $clip->getLinkFlash());
 			$this->tpl->setVariable('FLASH', $this->pl->txt('flash'));
-			$this->tpl->setVariable('ImgMp4', $this->pl->getImagePath('player_btn_flash.png'));
+			$this->tpl->setVariable('ImgMp4', $this->pl->getImagePath('player_btn_stream.svg'));
 			$this->tpl->parseCurrentBlock();
 		}
 		if ($clip->getLinkMov()) {
 			$this->tpl->setCurrentBlock('quicktime');
 			$this->tpl->setVariable('QUICKTIME', $this->pl->txt('quicktime'));
 			$this->tpl->setVariable('LinkMov', $clip->getLinkMov());
-			$this->tpl->setVariable('ImgMov', $this->pl->getImagePath('player_btn_quicktime.png'));
+			$this->tpl->setVariable('ImgMov', $this->pl->getImagePath('player_btn_download.svg'));
 			$this->tpl->parseCurrentBlock();
 		}
 		if ($clip->getLinkM4v()) {
 			$this->tpl->setCurrentBlock('ipod');
 			$this->tpl->setVariable('IPOD', $this->pl->txt('ipod'));
 			$this->tpl->setVariable('LinkM4v', $clip->getLinkM4v());
-			$this->tpl->setVariable('ImgM4v', $this->pl->getImagePath('player_btn_ipod.png'));
+			$this->tpl->setVariable('ImgM4v', $this->pl->getImagePath('player_btn_ipod.svg'));
 			$this->tpl->parseCurrentBlock();
 		}
 		if ($clip->getAnnotationlink()) {
 			$this->tpl->setCurrentBlock('annotation');
 			$this->tpl->setVariable('ANNOTATION', 'Annotation');
 			$this->tpl->setVariable('LinkAnnotation', $clip->getAnnotationlink());
-			$this->tpl->setVariable('ImgAnno', $this->pl->getImagePath('player_btn_flash.png'));
+			$this->tpl->setVariable('ImgAnno', $this->pl->getImagePath('player_btn_annotiation.svg'));
 			$this->tpl->parseCurrentBlock();
 		}
 		if ($clip->getDownloadLink()) {
