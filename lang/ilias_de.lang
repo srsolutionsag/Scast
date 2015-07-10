@@ -19,6 +19,7 @@ channel_license_desc#:#For detailed information, visit <a target='_blank' href='
 #:#
 clip_add#:#Clip hinzufügen
 clip_reload#:#Clips neu laden
+msg_cache_flushed#:#Clips wurden neu geladen
 clip_actions#:#Aktionen
 clip_edit#:#Metadaten editieren
 clip_edit_members#:#Mitglieder bearbeiten

@@ -171,7 +171,6 @@ class ilObjScast extends ilObjectPlugin {
 		 * @var $ilDB ilDB
 		 */
 		$ref_ids = array();
-
 		$set = $ilDB->query('SELECT * FROM rep_robj_xsca_data ' . ' WHERE ext_id = ' . $ilDB->quote($ext_id, 'text'));
 		while ($rec = $ilDB->fetchObject($set)) {
 			$ref_ids = array_merge($ref_ids, ilObject2::_getAllReferences($rec->id));

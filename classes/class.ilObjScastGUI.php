@@ -581,7 +581,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$html_output = '';
 		if ($this->object->getIntroductionText()) {
 			$introduction_text = $this->pl->getTemplate('default/tpl.introduction_text.html');
-			$introduction_text->setVariable('TITLE', $this->plugin->txt('introduction_text'));
+			$introduction_text->setVariable('TITLE', $this->plugin->txt('channel_introduction_text'));
 			$introduction_text->setVariable('BODY', nl2br($this->object->getIntroductionText()));
 			$html_output = $introduction_text->get();
 		}

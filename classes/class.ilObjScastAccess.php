@@ -123,14 +123,12 @@ class ilObjScastAccess extends ilObjectPluginAccess {
 		/**
 		 * @var $ilAccess ilAccessHandler
 		 */
-		$access = false;
 		foreach (ilObjScast::getAllRefIdsForExtId($clip->getChannelExtId()) as $ref_id) {
 			if ($ilAccess->checkAccess($permission, '', $ref_id)) {
-				$access = true;
+				return true;
 			}
 		}
-
-		return $access;
+	   return false;
 	}
 
 
