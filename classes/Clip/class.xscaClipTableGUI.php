@@ -201,7 +201,7 @@ class xscaClipTableGUI extends ilTable2GUI {
 			$this->tpl->setCurrentBlock('annotation');
 			$this->tpl->setVariable('ANNOTATION', 'Annotation');
 			$this->tpl->setVariable('LinkAnnotation', $clip->getAnnotationlink());
-			$this->tpl->setVariable('ImgAnno', $this->pl->getImagePath('player_btn_annotiation.svg'));
+			$this->tpl->setVariable('ImgAnno', $this->pl->getImagePath('player_btn_annotation.svg'));
 			$this->tpl->parseCurrentBlock();
 		}
 		if ($clip->getDownloadLink()) {
