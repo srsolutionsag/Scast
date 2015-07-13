@@ -105,7 +105,7 @@ class xscaClipFormGUI extends ilPropertyFormGUI {
 
 
 	protected function addCommandButtons() {
-		if ($this->clip->getExtId() == 0) {
+		if ($this->clip->getExtId() == NULL) {
 			$this->addCommandButton('create', $this->pl->txt('clip_create'));
 		} else {
 			$this->addCommandButton('update', $this->pl->txt('clip_update'));
