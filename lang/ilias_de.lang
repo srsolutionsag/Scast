@@ -143,6 +143,11 @@ xsca_new#:#Einen neuen SWITCHcast Channel erstellen
 xsca_read#:#Lesezugriff: Lesezugriff auf Channel
 xsca_visible#:#Anzeigen: Channel ist sichtbar
 xsca_write#:#Bearbeiten: Channel-Einstellungen bearbeiten
+fold_create_xsca#:#SWITCHcast Channel hinzufügen
+grp_create_xsca#:#SWITCHcast Channel hinzufügen
+root_create_xsca#:#SWITCHcast Channel hinzufügen
+crs_create_xsca#:#SWITCHcast Channel hinzufügen
+cat_create_xsca#:#SWITCHcast Channel hinzufügen
 #:#
 #:#
 #:#

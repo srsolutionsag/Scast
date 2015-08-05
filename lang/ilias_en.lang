@@ -143,6 +143,11 @@ xsca_new#:#Create new SWITCHcast Channel
 xsca_read#:#Channel is readable
 xsca_visible#:#Channel is visible
 xsca_write#:#Edit Channel-Settings
+fold_create_xsca#:#Add SWITCHcast Channel
+grp_create_xsca#:#Add SWITCHcast Channel
+root_create_xsca#:#Add SWITCHcast Channel
+crs_create_xsca#:#Add SWITCHcast Channel
+cat_create_xsca#:#Add SWITCHcast Channel
 #:#
 #:#
 #:#
