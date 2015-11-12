@@ -32,6 +32,7 @@ clip_location#:#Ort
 clip_update#:#Speichern
 clip_create#:#Speichern
 clip_cancel#:#Abbrechen
+delete_clip#:#Clip löschen
 #:#
 edit_properties#:#Eigenschaften bearbeiten
 actions#:#Aktionen

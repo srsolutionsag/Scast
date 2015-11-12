@@ -32,6 +32,7 @@ clip_location#:#Location
 clip_update#:#Save
 clip_create#:#Save
 clip_cancel#:#Cancel
+delete_clip#:#Delete Clip
 #:#
 edit_properties#:#Edit Settings
 actions#:#Actions
