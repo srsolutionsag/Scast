@@ -68,6 +68,7 @@ clip_status_importing#:#Clip wird importiert
 clip_status_preparing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
 clip_status_processing#:#Clip wird aufbereitet, für Studierende noch nicht sichtbar
 clip_status_error#:#Es ist ein Fehler bei SwitchCast aufgetreten
+clip_status_modified#:#Clip wurde modifiziert. Clip für Studierende nicht sichtbar.
 clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips#:#Clips
 tab_configure#:#SwitchCast konfigurieren

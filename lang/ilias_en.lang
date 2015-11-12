@@ -63,11 +63,12 @@ clip_deleted#:#The clip has been deleted.
 clip_inviting_possible#:#Clip Owner are able to invite other users
 clip_onpublishing#:#Bitte haben Sie etwas Geduld. Der Clip wird publiziert.
 clip_onupload#:#Bitte haben Sie etwas Geduld. Der Clip wird derzeit für die spätere Bearbeitung vorbereitet.
-clip_status_created#:#Clip not yet published, not visible for students
+clip_status_created#:#Clip not yet published, not visible to students
 clip_status_importing#:#Clip's beeing imported
-clip_status_preparing#:#Clip is beeing prepared, not yet visible for students
-clip_status_processing#:#Clip is beeing processed, not yet visible for students
+clip_status_preparing#:#Clip is beeing prepared, not yet visible to students
+clip_status_processing#:#Clip is beeing processed, not yet visible to students
 clip_status_error#:#An error occured with SwitchCast
+clip_status_modified#:#Clip has been modified. Not yet visible to students.
 clip_unpublished#:#Der Clip wurde noch nicht publiziert. Sie können diesen durch Klicken auf Bearbeiten schneiden und publizieren.
 clips#:#Clips
 tab_configure#:#Configure SwitchCast
