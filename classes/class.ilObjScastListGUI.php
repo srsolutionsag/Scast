@@ -35,14 +35,6 @@ class ilObjScastListGUI extends ilObjectPluginListGUI {
 	public function initCommands() {
 		$this->copy_enabled = false;
         $this->enableTags(true);
-		global $objDefinition;
-		/**
-		 * @var $objDefinition ilObjectDefinition
-		 */
-		$pl_id = 'xsca';
-		unset($objDefinition->obj_data['fold']['subobjects'][$pl_id]);
-		unset($objDefinition->obj_data['cat']['subobjects'][$pl_id]);
-		unset($objDefinition->obj_data['root']['subobjects'][$pl_id]);
 
 		return array(
 			array(
