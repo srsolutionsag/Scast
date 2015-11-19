@@ -193,8 +193,6 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				$this->$cmd();
 				break;
 			case 'showContent': // list all commands that need read permission here
-			case 'cancelClipOwner':
-			case 'cancelClipMember':
 			case 'applyFilter':
 			case 'resetFilter':
 			case 'reloadCache':
@@ -208,6 +206,10 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 			case 'updateClipMember':
 			case 'deleteClipMember':
 			case 'confirmDeleteClip':
+			case 'updateClipOwner':
+			case 'editClipMembers':
+			case 'cancelClipOwner':
+			case 'cancelClipMembers':
 			case 'deleteClip':
 				$this->tabs_gui->activateTab('content');
 				$clip_gui = new xscaClipGUI($this, $this->object);

@@ -63,6 +63,10 @@ class xscaClipGUI {
 	public function executeCommand() {
 		$cmd = $this->ctrl->getCmd();
 		switch ($cmd) {
+			case 'cancelClipOwner':
+			case 'cancelClipMember':
+				$this->cancel();
+				break;
 			case 'edit':
 				$this->tpl->getStandardTemplate();
 				$this->$cmd();
@@ -137,7 +141,6 @@ class xscaClipGUI {
 		// Form
 		$this->clip_owner_form = new ilPropertyFormGUI();
 		$this->clip_owner_form->setTitle($this->pl->txt('clip_edit_owner'));
-		$this->clip_owner_form->setFormAction($this->ctrl->getLinkTargetByClass('ilObjScastGUI'));
 		$ilParticipants = new ilCourseParticipants($this->objScast->getCourseId());
 		$arr_participants = array();
 		$arr_participants[''] = '--' . $this->pl->txt('not_assigned') . '--';
@@ -155,6 +158,7 @@ class xscaClipGUI {
 		$this->clip_owner_form->addItem($owner);
 		$this->clip_owner_form->addCommandButton('updateClipOwner', $this->pl->txt('save'));
 		$this->clip_owner_form->addCommandButton('cancelClipOwner', $this->pl->txt('cancel'));
+		$this->form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
 	}
 
 
@@ -262,7 +266,6 @@ class xscaClipGUI {
 		// Form
 		$this->clip_member_form = new ilPropertyFormGUI();
 		$this->clip_member_form->setTitle($this->pl->txt('add_Member'));
-		$this->clip_member_form->setFormAction($this->ctrl->getLinkTargetByClass('ilObjScastGUI'));
 		$ilParticipants = new ilCourseParticipants($this->objScast->getCourseId());
 		$arr_participants = array();
 		$arr_participants[] = '--' . $this->pl->txt('not_assigned') . '--';
@@ -285,6 +288,8 @@ class xscaClipGUI {
 		$this->clip_member_form->addItem($clipmember);
 		$this->clip_member_form->addCommandButton('updateClipMember', $this->pl->txt('add_member'));
 		$this->clip_member_form->addCommandButton('cancelClipMember', $this->pl->txt('cancel'));
+		$this->form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
+
 	}
 
 
