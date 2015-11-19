@@ -252,8 +252,8 @@ class xscaClipGUI {
 			if ($clipmember > 0) {
 				$this->clip->addMember($clipmember);
 				xscaApiCache::flush($this->objScast->getId());
-				echo xscaClipMembersTableGUI::getNewRow($clipmember);
-				exit;
+				ilUtil::sendSuccess($this->pl->txt('msg_obj_modified'), true);
+				$this->ctrl->redirect($this->parent_gui, 'editClipMembers');
 			}
 		}
 	}
