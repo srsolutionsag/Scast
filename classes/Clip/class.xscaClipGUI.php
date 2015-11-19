@@ -158,7 +158,7 @@ class xscaClipGUI {
 		$this->clip_owner_form->addItem($owner);
 		$this->clip_owner_form->addCommandButton('updateClipOwner', $this->pl->txt('save'));
 		$this->clip_owner_form->addCommandButton('cancelClipOwner', $this->pl->txt('cancel'));
-		$this->form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
+		$this->clip_owner_form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
 	}
 
 
@@ -288,7 +288,7 @@ class xscaClipGUI {
 		$this->clip_member_form->addItem($clipmember);
 		$this->clip_member_form->addCommandButton('updateClipMember', $this->pl->txt('add_member'));
 		$this->clip_member_form->addCommandButton('cancelClipMember', $this->pl->txt('cancel'));
-		$this->form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
+		$this->clip_member_form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
 
 	}
 
