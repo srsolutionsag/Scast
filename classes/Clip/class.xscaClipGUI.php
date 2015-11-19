@@ -64,7 +64,7 @@ class xscaClipGUI {
 		$cmd = $this->ctrl->getCmd();
 		switch ($cmd) {
 			case 'cancelClipOwner':
-			case 'cancelClipMember':
+			case 'cancelClipMembers':
 				$this->cancel();
 				break;
 			case 'edit':
@@ -245,7 +245,7 @@ class xscaClipGUI {
 	}
 
 
-	public function updateClipMember() {
+	public function updateClipMembers() {
 		$this->initClipMemberForm();
 		if ($this->clip_member_form->checkInput()) {
 			$clipmember = $this->clip_member_form->getInput('clipmember');
@@ -286,8 +286,8 @@ class xscaClipGUI {
 		$clipmember = new ilSelectInputGUI($this->pl->txt('member'), 'clipmember');
 		$clipmember->setOptions($arr_participants);
 		$this->clip_member_form->addItem($clipmember);
-		$this->clip_member_form->addCommandButton('updateClipMember', $this->pl->txt('add_member'));
-		$this->clip_member_form->addCommandButton('cancelClipMember', $this->pl->txt('cancel'));
+		$this->clip_member_form->addCommandButton('updateClipMembers', $this->pl->txt('add_member'));
+		$this->clip_member_form->addCommandButton('cancelClipMembers', $this->pl->txt('cancel'));
 		$this->clip_member_form->setFormAction($this->ctrl->getFormActionByClass("ilObjScastGUI"));
 
 	}
