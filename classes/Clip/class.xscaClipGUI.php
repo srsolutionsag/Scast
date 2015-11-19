@@ -137,7 +137,7 @@ class xscaClipGUI {
 		// Form
 		$this->clip_owner_form = new ilPropertyFormGUI();
 		$this->clip_owner_form->setTitle($this->pl->txt('clip_edit_owner'));
-		$this->clip_owner_form->setFormAction($this->ctrl->getLinkTargetByClass('ilObjScastGUI', 'updateClipOwner'));
+		$this->clip_owner_form->setFormAction($this->ctrl->getLinkTargetByClass('ilObjScastGUI'));
 		$ilParticipants = new ilCourseParticipants($this->objScast->getCourseId());
 		$arr_participants = array();
 		$arr_participants[''] = '--' . $this->pl->txt('not_assigned') . '--';
@@ -153,8 +153,8 @@ class xscaClipGUI {
 		$owner = new ilSelectInputGUI($this->pl->txt('owner'), 'owner');
 		$owner->setOptions($arr_participants);
 		$this->clip_owner_form->addItem($owner);
-		$this->clip_owner_form->addCommandButton('save', $this->pl->txt('save'));
-		$this->clip_owner_form->addCommandButton('cancel', $this->pl->txt('cancel'));
+		$this->clip_owner_form->addCommandButton('updateClipOwner', $this->pl->txt('save'));
+		$this->clip_owner_form->addCommandButton('cancelClipOwner', $this->pl->txt('cancel'));
 	}
 
 
