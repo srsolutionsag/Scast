@@ -194,6 +194,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				break;
 			case 'showContent': // list all commands that need read permission here
 			case 'cancelClipOwner':
+			case 'cancel':
 			case 'applyFilter':
 			case 'resetFilter':
 			case 'reloadCache':
