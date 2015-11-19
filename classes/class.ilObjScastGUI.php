@@ -201,13 +201,13 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 				break;
 			case 'editClipOwner': // list all commands that are for clip handling here
 			case 'updateClipOwner':
-			case 'editClipMembers':
+			case 'editClipMember':
 			case 'addClipMember':
 			case 'updateClipMember':
 			case 'deleteClipMember':
 			case 'confirmDeleteClip':
 			case 'updateClipOwner':
-			case 'editClipMembers':
+			case 'editClipMember':
 			case 'cancelClipOwner':
 			case 'cancelClipMembers':
 			case 'deleteClip':
