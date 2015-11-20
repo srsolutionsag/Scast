@@ -639,7 +639,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$ref_id = $target->getRefId();
 
 		if($ilUser->isAnonymous()){
-			ilUtil::redirect("login.php?target=".$target."&client_id=ilias3_unibe&cmd=force_login&lang=de");
+			ilUtil::redirect("login.php?client_id=ilias3_unibe&cmd=force_login&lang=de");
 		}
 		if ($target->getIsSwitchRedirect()) {
 			$clip = xscaClip::getInstance($target->getChannelId(), $target->getClipId());
