@@ -630,7 +630,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 	 * @access static
 	 */
 	static public function _goto($a_target) {
-		global $lng, $ilAccess;
+		global $lng, $ilAccess, $ilUser;
 		/**
 		 * @var $ilAccess ilAccessHandler
 		 * @var $ilCtrl   ilCtrl
@@ -638,6 +638,9 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$target = xscaTarget::get($a_target);
 		$ref_id = $target->getRefId();
 
+		if($ilUser->isAnonymous()){
+			ilUtil::redirect("login.php?target=".$target."&client_id=ilias3_unibe&cmd=force_login&lang=de");
+		}
 		if ($target->getIsSwitchRedirect()) {
 			$clip = xscaClip::getInstance($target->getChannelId(), $target->getClipId());
 			ilObjScastAccess::checkAccessOnClipForAllReferences($clip);
