@@ -473,12 +473,19 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$this->form->addItem($annot_type);
 		// Streaming Only: Nur editierbar, falls neue Channels generiert werden. Dies ändert das SWITCHcast-Template. Dies sollte man
 		// nicht bei bestehenden Channel tun.
-		$cb = new ilCheckboxInputGUI($this->txt('streaming_only'), 'streaming_only');
+
+		//Fix for ilias mantis 846
 		if ($edit_mode) {
-			$cb->setDisabled(true);
+			$cb = new ilHiddenInputGUI('streaming_only', 'streaming_only');
+			$cb_visible = new ilCheckboxInputGUI($this->txt('streaming_only'), 'streaming_only_visible');
+			$cb_visible->setDisabled(true);
+			$this->form->addItem($cb_visible);
+		}else{
+			$cb = new ilCheckboxInputGUI($this->txt('streaming_only'), 'streaming_only');
+			$cb->setValue(1);
 		}
-		$cb->setValue(1);
 		$this->form->addItem($cb);
+
 		// Type (IVT or Scast)
 		if (!xscaConfig::get('deactivate_ivt')) {
 			$cb = new ilCheckboxInputGUI($this->txt('channel_clip_based_rightmanagement'), 'clip_based_rightmanagement');
@@ -534,6 +541,7 @@ class ilObjScastGUI extends ilObjectPluginGUI {
 		$values['lifetime_of_content_in_months'] = $this->object->getLifetimeOfContentinMonth();
 		$values['department'] = $this->object->getDepartment();
 		$values['streaming_only'] = $this->object->getStreamingOnly();
+		$values['streaming_only_visible'] = $this->object->getStreamingOnly();
 		$values['online'] = $this->object->getOnline();
 		$values['show_upload_token'] = $this->object->getShowUploadToken();
 		$this->form->setValuesByArray($values);
