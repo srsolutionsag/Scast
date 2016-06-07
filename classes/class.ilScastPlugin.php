@@ -114,6 +114,12 @@ class ilScastPlugin extends ilRepositoryObjectPlugin {
 		}
 		$this->updateLanguages();
 	}
+
+
+	protected function uninstallCustom()
+	{
+		return false;
+	}
 }
 
 ?>
