@@ -298,7 +298,7 @@ class ilObjScast extends ilObjectPlugin {
 
 
 	public function doRead() {
-		if (!self::$loaded) {
+//		if (!self::$loaded) {
 			if (!is_object($this->db)) {
 				global $ilDB;
 				$this->db = $ilDB;
@@ -349,8 +349,8 @@ class ilObjScast extends ilObjectPlugin {
 			}
 			$this->syncAdmins();
 			$this->syncMembers();
-			self::$loaded = true;
-		}
+//			self::$loaded = true;
+//		}
 	}
 
 
